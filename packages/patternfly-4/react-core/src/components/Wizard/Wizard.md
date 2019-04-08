@@ -196,7 +196,6 @@ class ValidationWizard extends React.Component {
             onNext={this.onNext}
             onBack={this.onBack}
             onGoToStep={this.onGoToStep}
-            footerRightAlign
             backgroundImgSrc={images}
           />
         )}

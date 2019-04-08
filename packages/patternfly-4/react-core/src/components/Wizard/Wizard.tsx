@@ -74,8 +74,6 @@ export interface WizardProps {
   cancelButtonText?: string;
   /** The text for the Next button on the last step */
   lastStepButtonText?: string;
-  /** Alignment of the footer items */
-  footerRightAlign?: boolean;
   /** aria-label for the close button */
   ariaLabelCloseButton?: string;
   /** aria-label for the Nav */
@@ -108,7 +106,6 @@ class Wizard extends React.Component<WizardProps> {
     backButtonText: 'Back',
     cancelButtonText: 'Cancel',
     lastStepButtonText: 'Save',
-    footerRightAlign: false,
     ariaLabelCloseButton: 'Close',
     ariaLabelNav: 'Steps',
     hasBodyPadding: true
@@ -296,7 +293,6 @@ class Wizard extends React.Component<WizardProps> {
       backButtonText,
       cancelButtonText,
       lastStepButtonText,
-      footerRightAlign,
       ariaLabelCloseButton,
       ariaLabelNav,
       hasBodyPadding,
@@ -356,7 +352,7 @@ class Wizard extends React.Component<WizardProps> {
                 <BackgroundImage src={backgroundImgSrc} />
                 <WizardHeader titleId={this.titleId} descriptionId={this.descriptionId} onClose={onClose} title={title} description={description as string} ariaLabel={ariaLabelCloseButton as string} />
                 <WizardToggle isNavOpen={isNavOpen} onNavToggle={(isNavOpen) => this.setState({ isNavOpen })} nav={nav} steps={steps} activeStep={activeStep} hasBodyPadding={hasBodyPadding as boolean}>
-                  <footer className={css(styles.wizardFooter, footerRightAlign && 'pf-m-align-right')}>
+                  <footer className={css(styles.wizardFooter)}>
                     <Button variant="primary" type="submit" onClick={this.onNext} isDisabled={!isValid}>
                       {lastStep ? lastStepButtonText : nextButtonText}
                     </Button>
