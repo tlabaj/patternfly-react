@@ -311,9 +311,13 @@ exports[`Wizard should match snapshot 1`] = `
                   <main
                     class="pf-c-wizard__main"
                   >
-                    <p>
-                      Step 1
-                    </p>
+                    <div
+                      class="pf-c-wizard__main-body"
+                    >
+                      <p>
+                        Step 1
+                      </p>
+                    </div>
                   </main>
                 </div>
                 <footer
@@ -516,9 +520,13 @@ exports[`Wizard should match snapshot 1`] = `
                   <main
                     class="pf-c-wizard__main"
                   >
-                    <p>
-                      Step 1
-                    </p>
+                    <div
+                      class="pf-c-wizard__main-body"
+                    >
+                      <p>
+                        Step 1
+                      </p>
+                    </div>
                   </main>
                 </div>
                 <footer
