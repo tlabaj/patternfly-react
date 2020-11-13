@@ -6,6 +6,7 @@ import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclama
 import ExclamationTriangleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-triangle-icon';
 import InfoCircleIcon from '@patternfly/react-icons/dist/js/icons/info-circle-icon';
 import BellIcon from '@patternfly/react-icons/dist/js/icons/bell-icon';
+import { SVGIconProps } from '@patternfly/react-icons/dist/js/createIcon';
 
 export const variantIcons = {
   success: CheckCircleIcon,
@@ -20,10 +21,12 @@ export interface AlertIconProps extends React.HTMLProps<HTMLDivElement> {
   variant: 'success' | 'danger' | 'warning' | 'info' | 'default';
   /** className */
   className?: string;
+  /** A custom icon. If not set the icon is set according to the variant */
+  customIcon?: React.ComponentClass<SVGIconProps>;
 }
 
-export const AlertIcon = ({ variant, className = '', ...props }: AlertIconProps) => {
-  const Icon = variantIcons[variant];
+export const AlertIcon = ({ variant, customIcon, className = '', ...props }: AlertIconProps) => {
+  const Icon = customIcon || variantIcons[variant];
   return (
     <div {...props} className={css(styles.alertIcon, className)}>
       <Icon />

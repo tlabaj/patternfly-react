@@ -8,6 +8,7 @@ import { capitalize, useOUIAProps, OUIAProps } from '../../helpers';
 import { AlertContext } from './AlertContext';
 import maxLines from '@patternfly/react-tokens/dist/js/c_alert__title_max_lines';
 import { Tooltip } from '../Tooltip';
+import { SVGIconProps } from '@patternfly/react-icons/dist/js/createIcon';
 
 export enum AlertVariant {
   success = 'success',
@@ -46,6 +47,8 @@ export interface AlertProps extends Omit<React.HTMLProps<HTMLDivElement>, 'actio
   truncateTitle?: number;
   /** Position of the tooltip which is displayed if text is truncated */
   tooltipPosition?: 'auto' | 'top' | 'bottom' | 'left' | 'right';
+  /** Set a custom icon to the Alert */
+  customIcon?: React.ComponentClass<SVGIconProps>;
 }
 
 export const Alert: React.FunctionComponent<AlertProps> = ({
@@ -65,6 +68,7 @@ export const Alert: React.FunctionComponent<AlertProps> = ({
   onTimeout,
   truncateTitle = 0,
   tooltipPosition,
+  customIcon = undefined,
   ...props
 }: AlertProps) => {
   const ouiaProps = useOUIAProps(Alert.displayName, ouiaId, ouiaSafe, variant);
@@ -128,7 +132,7 @@ export const Alert: React.FunctionComponent<AlertProps> = ({
           'aria-atomic': 'false'
         })}
       >
-        <AlertIcon variant={variant} />
+        <AlertIcon variant={variant} customIcon={customIcon} />
         {isTooltipVisible ? (
           <Tooltip content={getHeadingContent} position={tooltipPosition}>
             {Title}
