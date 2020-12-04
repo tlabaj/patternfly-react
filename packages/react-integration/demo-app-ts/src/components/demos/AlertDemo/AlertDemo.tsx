@@ -1,4 +1,5 @@
 import { Alert, AlertActionCloseButton } from '@patternfly/react-core';
+import UsersIcon from '@patternfly/react-icons/dist/js/icons/users-icon';
 import React from 'react';
 
 interface AlertDemoState {
@@ -55,6 +56,7 @@ export class AlertDemo extends React.Component<{}, AlertDemoState> {
           truncateTitle={3}
           tooltipPosition="bottom"
         />
+         <Alert customIcon={UsersIcon} title="Default alert title" />
       </React.Fragment>
     );
   }
