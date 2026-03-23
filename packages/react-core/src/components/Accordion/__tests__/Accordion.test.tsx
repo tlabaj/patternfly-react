@@ -1,7 +1,11 @@
+import '@testing-library/jest-dom';
+// eslint-disable-next-line no-restricted-imports -- React in scope required for TS (test file)
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { Accordion } from '../Accordion';
 import { AccordionContext } from '../AccordionContext';
+// @ts-ignore - react-styles subpath module resolution
 import styles from '@patternfly/react-styles/css/components/Accordion/accordion';
 
 test('Renders without children', () => {
@@ -33,7 +37,7 @@ test('Renders with inherited element props spread to the component', () => {
   expect(screen.getByText('Test')).toHaveAccessibleName('Label');
 });
 
-test(`Renders with class name ${styles.accordion}`, () => {
+test(`Renders with class ${styles.accordion}`, () => {
   render(<Accordion>Test</Accordion>);
 
   expect(screen.getByText('Test')).toHaveClass(styles.accordion);
@@ -62,7 +66,7 @@ test('Renders Accordion as a "div" when asDefinitionList is false', () => {
 test('Provides a ContentContainer of "dd" in a context by default', () => {
   render(
     <Accordion>
-      <AccordionContext.Consumer>{({ ContentContainer }) => ContentContainer}</AccordionContext.Consumer>
+      <AccordionContext.Consumer>{({ ContentContainer }) => String(ContentContainer)}</AccordionContext.Consumer>
     </Accordion>
   );
 
@@ -72,7 +76,7 @@ test('Provides a ContentContainer of "dd" in a context by default', () => {
 test('Provides a ContentContainer of "div" in a context when asDefinitionList is false', () => {
   render(
     <Accordion asDefinitionList={false}>
-      <AccordionContext.Consumer>{({ ContentContainer }) => ContentContainer}</AccordionContext.Consumer>
+      <AccordionContext.Consumer>{({ ContentContainer }) => String(ContentContainer)}</AccordionContext.Consumer>
     </Accordion>
   );
 
@@ -82,7 +86,7 @@ test('Provides a ContentContainer of "div" in a context when asDefinitionList is
 test('Provides a ToggleContainer of "dt" in a context by default', () => {
   render(
     <Accordion>
-      <AccordionContext.Consumer>{({ ToggleContainer }) => ToggleContainer}</AccordionContext.Consumer>
+      <AccordionContext.Consumer>{({ ToggleContainer }) => String(ToggleContainer)}</AccordionContext.Consumer>
     </Accordion>
   );
 
@@ -92,7 +96,7 @@ test('Provides a ToggleContainer of "dt" in a context by default', () => {
 test('Provides a ToggleContainer of "h3" in a context when asDefinitionList is false', () => {
   render(
     <Accordion asDefinitionList={false}>
-      <AccordionContext.Consumer>{({ ToggleContainer }) => ToggleContainer}</AccordionContext.Consumer>
+      <AccordionContext.Consumer>{({ ToggleContainer }) => String(ToggleContainer)}</AccordionContext.Consumer>
     </Accordion>
   );
 
@@ -102,7 +106,7 @@ test('Provides a ToggleContainer of "h3" in a context when asDefinitionList is f
 test('Provides a ToggleContainer of "h2" in a context when asDefinitionList is false and headingLevel is "h2"', () => {
   render(
     <Accordion asDefinitionList={false} headingLevel="h2">
-      <AccordionContext.Consumer>{({ ToggleContainer }) => ToggleContainer}</AccordionContext.Consumer>
+      <AccordionContext.Consumer>{({ ToggleContainer }) => String(ToggleContainer)}</AccordionContext.Consumer>
     </Accordion>
   );
 
@@ -119,6 +123,38 @@ test('Renders with pf-m-bordered when isBordered=true', () => {
   render(<Accordion isBordered>Test</Accordion>);
 
   expect(screen.getByText('Test')).toHaveClass('pf-m-bordered');
+});
+
+test(`Renders without class ${styles.modifiers.noPlain} by default`, () => {
+  render(<Accordion>Test</Accordion>);
+
+  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.noPlain);
+});
+
+test(`Renders without class ${styles.modifiers.noPlain} when isPlain is undefined`, () => {
+  render(<Accordion isPlain={undefined}>Test</Accordion>);
+
+  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.noPlain);
+});
+
+test(`Renders without class ${styles.modifiers.noPlain} when isPlain=false and glass theme is not applied`, () => {
+  render(<Accordion isPlain={false}>Test</Accordion>);
+
+  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.noPlain);
+});
+
+test(`Renders with class ${styles.modifiers.noPlain} when isPlain=false and glass theme is applied`, () => {
+  document.documentElement.classList.add('pf-v6-theme-glass');
+  render(<Accordion isPlain={false}>Test</Accordion>);
+
+  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.noPlain);
+  document.documentElement.classList.remove('pf-v6-theme-glass');
+});
+
+test(`Renders without class ${styles.modifiers.noPlain} when isPlain=true`, () => {
+  render(<Accordion isPlain>Test</Accordion>);
+
+  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.noPlain);
 });
 
 test('Renders without pf-m-display-lg by default', () => {

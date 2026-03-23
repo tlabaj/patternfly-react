@@ -1,5 +1,6 @@
 import { css } from '@patternfly/react-styles';
 import styles from '@patternfly/react-styles/css/components/Accordion/accordion';
+import { hasGlassTheme } from '../../helpers/util';
 import { AccordionContext } from './AccordionContext';
 
 export interface AccordionProps extends React.HTMLProps<HTMLDListElement> {
@@ -15,6 +16,8 @@ export interface AccordionProps extends React.HTMLProps<HTMLDListElement> {
   asDefinitionList?: boolean;
   /** Flag to indicate the accordion had a border */
   isBordered?: boolean;
+  /** Flag to indicate if the accordion is plain */
+  isPlain?: boolean;
   /** Display size variant. */
   displaySize?: 'default' | 'lg';
   /** Sets the toggle icon position for all accordion toggles. */
@@ -28,6 +31,7 @@ export const Accordion: React.FunctionComponent<AccordionProps> = ({
   headingLevel = 'h3',
   asDefinitionList = true,
   isBordered = false,
+  isPlain = false,
   displaySize = 'default',
   togglePosition = 'end',
   ...props
@@ -38,6 +42,7 @@ export const Accordion: React.FunctionComponent<AccordionProps> = ({
       className={css(
         styles.accordion,
         isBordered && styles.modifiers.bordered,
+        !isPlain && hasGlassTheme() && styles.modifiers.noPlain,
         togglePosition === 'start' && styles.modifiers.toggleStart,
         displaySize === 'lg' && styles.modifiers.displayLg,
         className
