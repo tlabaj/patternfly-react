@@ -143,10 +143,13 @@ test(`Renders without class ${styles.modifiers.noPlain} when isPlain=false and g
 
 test(`Renders with class ${styles.modifiers.noPlain} when isPlain=false and glass theme is applied`, () => {
   document.documentElement.classList.add('pf-v6-theme-glass');
-  render(<Accordion isPlain={false}>Test</Accordion>);
+  try {
+    render(<Accordion isPlain={false}>Test</Accordion>);
 
-  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.noPlain);
-  document.documentElement.classList.remove('pf-v6-theme-glass');
+    expect(screen.getByText('Test')).toHaveClass(styles.modifiers.noPlain);
+  } finally {
+    document.documentElement.classList.remove('pf-v6-theme-glass');
+  }
 });
 
 test(`Renders without class ${styles.modifiers.noPlain} when isPlain=true`, () => {
