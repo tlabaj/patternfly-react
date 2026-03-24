@@ -16,7 +16,11 @@ export interface AccordionProps extends React.HTMLProps<HTMLDListElement> {
   asDefinitionList?: boolean;
   /** Flag to indicate the accordion had a border */
   isBordered?: boolean;
-  /** Flag to indicate if the accordion is plain */
+  /**
+   * Flag to indicate if the accordion uses plain styling. Only applicable when the PatternFly glass
+   * theme is active (e.g. `pf-v6-theme-glass` on the document root); when the glass theme is not
+   * active, this prop has no effect.
+   */
   isPlain?: boolean;
   /** Display size variant. */
   displaySize?: 'default' | 'lg';
