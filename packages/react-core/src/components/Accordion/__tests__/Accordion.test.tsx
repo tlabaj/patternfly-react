@@ -1,11 +1,9 @@
 import '@testing-library/jest-dom';
-// eslint-disable-next-line no-restricted-imports -- React in scope required for TS (test file)
-import React from 'react';
+import { Fragment } from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { Accordion } from '../Accordion';
 import { AccordionContext } from '../AccordionContext';
-// @ts-ignore - react-styles subpath module resolution
 import styles from '@patternfly/react-styles/css/components/Accordion/accordion';
 
 test('Renders without children', () => {
@@ -28,10 +26,10 @@ test('Renders with the passed aria label', () => {
 
 test('Renders with inherited element props spread to the component', () => {
   render(
-    <>
+    <Fragment>
       <Accordion aria-labelledby="labelling-id">Test</Accordion>
       <p id="labelling-id">Label</p>
-    </>
+    </Fragment>
   );
 
   expect(screen.getByText('Test')).toHaveAccessibleName('Label');
