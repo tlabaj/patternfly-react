@@ -401,8 +401,13 @@ export const canUseDOM = !!(typeof window !== 'undefined' && window.document && 
  *
  * @returns {boolean} - True if the glass theme class is present on the html element
  */
-export const hasGlassTheme = (): boolean =>
-  typeof document !== 'undefined' && document.documentElement.classList.contains('pf-v6-theme-glass');
+export const hasGlassTheme = (): boolean => {
+  if (typeof document === 'undefined') {
+    return false;
+  }
+  const classList = document.documentElement?.classList;
+  return classList ? classList.contains('pf-v6-theme-glass') : false;
+};
 
 /**
  * Calculate the width of the text
