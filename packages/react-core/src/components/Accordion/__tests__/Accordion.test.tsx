@@ -129,33 +129,22 @@ test(`Renders without class ${styles.modifiers.noPlain} by default`, () => {
   expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.noPlain);
 });
 
-test(`Renders without class ${styles.modifiers.noPlain} when isPlain is undefined`, () => {
-  render(<Accordion isPlain={undefined}>Test</Accordion>);
+test(`Renders with class ${styles.modifiers.noPlain} when isNoPlainOnGlass`, () => {
+  render(<Accordion isNoPlainOnGlass>Test</Accordion>);
 
-  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.noPlain);
+  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.noPlain);
 });
 
-test(`Renders without class ${styles.modifiers.noPlain} when isPlain=false and glass theme is not applied`, () => {
-  render(<Accordion isPlain={false}>Test</Accordion>);
+test(`Renders without class ${styles.modifiers.plain} by default`, () => {
+  render(<Accordion>Test</Accordion>);
 
-  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.noPlain);
+  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.plain);
 });
 
-test(`Renders with class ${styles.modifiers.noPlain} when isPlain=false and glass theme is applied`, () => {
-  document.documentElement.classList.add('pf-v6-theme-glass');
-  try {
-    render(<Accordion isPlain={false}>Test</Accordion>);
-
-    expect(screen.getByText('Test')).toHaveClass(styles.modifiers.noPlain);
-  } finally {
-    document.documentElement.classList.remove('pf-v6-theme-glass');
-  }
-});
-
-test(`Renders without class ${styles.modifiers.noPlain} when isPlain=true`, () => {
+test(`Renders with class ${styles.modifiers.plain} when isPlain`, () => {
   render(<Accordion isPlain>Test</Accordion>);
 
-  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.noPlain);
+  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.plain);
 });
 
 test('Renders without pf-m-display-lg by default', () => {
