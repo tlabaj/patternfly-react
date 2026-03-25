@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom';
-import { Fragment } from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { Accordion } from '../Accordion';
@@ -26,10 +25,10 @@ test('Renders with the passed aria label', () => {
 
 test('Renders with inherited element props spread to the component', () => {
   render(
-    <Fragment>
+    <>
       <Accordion aria-labelledby="labelling-id">Test</Accordion>
       <p id="labelling-id">Label</p>
-    </Fragment>
+    </>
   );
 
   expect(screen.getByText('Test')).toHaveAccessibleName('Label');
@@ -111,16 +110,16 @@ test('Provides a ToggleContainer of "h2" in a context when asDefinitionList is f
   expect(screen.getByText('h2')).toBeVisible();
 });
 
-test('Renders without pf-m-bordered by default', () => {
+test(`Renders without class ${styles.modifiers.bordered} by default`, () => {
   render(<Accordion>Test</Accordion>);
 
-  expect(screen.getByText('Test')).not.toHaveClass('pf-m-bordered');
+  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.bordered);
 });
 
-test('Renders with pf-m-bordered when isBordered=true', () => {
+test(`Renders with class ${styles.modifiers.bordered} when isBordered=true`, () => {
   render(<Accordion isBordered>Test</Accordion>);
 
-  expect(screen.getByText('Test')).toHaveClass('pf-m-bordered');
+  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.bordered);
 });
 
 test(`Renders without class ${styles.modifiers.noPlain} by default`, () => {
@@ -147,16 +146,16 @@ test(`Renders with class ${styles.modifiers.plain} when isPlain`, () => {
   expect(screen.getByText('Test')).toHaveClass(styles.modifiers.plain);
 });
 
-test('Renders without pf-m-display-lg by default', () => {
+test(`Renders without class ${styles.modifiers.displayLg} by default`, () => {
   render(<Accordion>Test</Accordion>);
 
-  expect(screen.getByText('Test')).not.toHaveClass('pf-m-display-lg');
+  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.displayLg);
 });
 
-test('Renders with pf-m-display-lg when displaySize="lg"', () => {
+test(`Renders with class ${styles.modifiers.displayLg} when displaySize="lg"`, () => {
   render(<Accordion displaySize="lg">Test</Accordion>);
 
-  expect(screen.getByText('Test')).toHaveClass('pf-m-display-lg');
+  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.displayLg);
 });
 
 test(`Renders without class ${styles.modifiers.toggleStart} by default`, () => {
