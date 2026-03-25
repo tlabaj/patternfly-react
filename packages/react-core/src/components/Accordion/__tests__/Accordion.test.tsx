@@ -34,7 +34,7 @@ test('Renders with inherited element props spread to the component', () => {
   expect(screen.getByText('Test')).toHaveAccessibleName('Label');
 });
 
-test(`Renders with class ${styles.accordion}`, () => {
+test(`Renders with class name ${styles.accordion}`, () => {
   render(<Accordion>Test</Accordion>);
 
   expect(screen.getByText('Test')).toHaveClass(styles.accordion);
@@ -63,7 +63,7 @@ test('Renders Accordion as a "div" when asDefinitionList is false', () => {
 test('Provides a ContentContainer of "dd" in a context by default', () => {
   render(
     <Accordion>
-      <AccordionContext.Consumer>{({ ContentContainer }) => String(ContentContainer)}</AccordionContext.Consumer>
+      <AccordionContext.Consumer>{({ ContentContainer }) => ContentContainer}</AccordionContext.Consumer>
     </Accordion>
   );
 
@@ -73,7 +73,7 @@ test('Provides a ContentContainer of "dd" in a context by default', () => {
 test('Provides a ContentContainer of "div" in a context when asDefinitionList is false', () => {
   render(
     <Accordion asDefinitionList={false}>
-      <AccordionContext.Consumer>{({ ContentContainer }) => String(ContentContainer)}</AccordionContext.Consumer>
+      <AccordionContext.Consumer>{({ ContentContainer }) => ContentContainer}</AccordionContext.Consumer>
     </Accordion>
   );
 
@@ -83,7 +83,7 @@ test('Provides a ContentContainer of "div" in a context when asDefinitionList is
 test('Provides a ToggleContainer of "dt" in a context by default', () => {
   render(
     <Accordion>
-      <AccordionContext.Consumer>{({ ToggleContainer }) => String(ToggleContainer)}</AccordionContext.Consumer>
+      <AccordionContext.Consumer>{({ ToggleContainer }) => ToggleContainer}</AccordionContext.Consumer>
     </Accordion>
   );
 
@@ -93,7 +93,7 @@ test('Provides a ToggleContainer of "dt" in a context by default', () => {
 test('Provides a ToggleContainer of "h3" in a context when asDefinitionList is false', () => {
   render(
     <Accordion asDefinitionList={false}>
-      <AccordionContext.Consumer>{({ ToggleContainer }) => String(ToggleContainer)}</AccordionContext.Consumer>
+      <AccordionContext.Consumer>{({ ToggleContainer }) => ToggleContainer}</AccordionContext.Consumer>
     </Accordion>
   );
 
@@ -103,59 +103,59 @@ test('Provides a ToggleContainer of "h3" in a context when asDefinitionList is f
 test('Provides a ToggleContainer of "h2" in a context when asDefinitionList is false and headingLevel is "h2"', () => {
   render(
     <Accordion asDefinitionList={false} headingLevel="h2">
-      <AccordionContext.Consumer>{({ ToggleContainer }) => String(ToggleContainer)}</AccordionContext.Consumer>
+      <AccordionContext.Consumer>{({ ToggleContainer }) => ToggleContainer}</AccordionContext.Consumer>
     </Accordion>
   );
 
   expect(screen.getByText('h2')).toBeVisible();
 });
 
-test(`Renders without class ${styles.modifiers.bordered} by default`, () => {
+test('Renders without pf-m-bordered by default', () => {
   render(<Accordion>Test</Accordion>);
 
-  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.bordered);
+  expect(screen.getByText('Test')).not.toHaveClass('pf-m-bordered');
 });
 
-test(`Renders with class ${styles.modifiers.bordered} when isBordered=true`, () => {
+test('Renders with pf-m-bordered when isBordered=true', () => {
   render(<Accordion isBordered>Test</Accordion>);
 
-  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.bordered);
+  expect(screen.getByText('Test')).toHaveClass('pf-m-bordered');
 });
 
-test(`Renders without class ${styles.modifiers.noPlain} by default`, () => {
+test('Renders without class pf-m-no-plain by default', () => {
   render(<Accordion>Test</Accordion>);
 
-  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.noPlain);
+  expect(screen.getByText('Test')).not.toHaveClass('pf-m-no-plain');
 });
 
-test(`Renders with class ${styles.modifiers.noPlain} when isNoPlainOnGlass`, () => {
+test('Renders with class pf-m-no-plain when isNoPlainOnGlass', () => {
   render(<Accordion isNoPlainOnGlass>Test</Accordion>);
 
-  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.noPlain);
+  expect(screen.getByText('Test')).toHaveClass('pf-m-no-plain');
 });
 
-test(`Renders without class ${styles.modifiers.plain} by default`, () => {
+test('Renders without class pf-m-plain by default', () => {
   render(<Accordion>Test</Accordion>);
 
-  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.plain);
+  expect(screen.getByText('Test')).not.toHaveClass('pf-m-plain');
 });
 
-test(`Renders with class ${styles.modifiers.plain} when isPlain`, () => {
+test('Renders with class pf-m-plain when isPlain', () => {
   render(<Accordion isPlain>Test</Accordion>);
 
-  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.plain);
+  expect(screen.getByText('Test')).toHaveClass('pf-m-plain');
 });
 
-test(`Renders without class ${styles.modifiers.displayLg} by default`, () => {
+test('Renders without pf-m-display-lg by default', () => {
   render(<Accordion>Test</Accordion>);
 
-  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.displayLg);
+  expect(screen.getByText('Test')).not.toHaveClass('pf-m-display-lg');
 });
 
-test(`Renders with class ${styles.modifiers.displayLg} when displaySize="lg"`, () => {
+test('Renders with pf-m-display-lg when displaySize="lg"', () => {
   render(<Accordion displaySize="lg">Test</Accordion>);
 
-  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.displayLg);
+  expect(screen.getByText('Test')).toHaveClass('pf-m-display-lg');
 });
 
 test(`Renders without class ${styles.modifiers.toggleStart} by default`, () => {
