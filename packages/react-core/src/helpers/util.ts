@@ -396,20 +396,6 @@ export const toCamel = (s: string) => s.replace(/([-_][a-z])/gi, camelize);
 export const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
 /**
- * Checks if the PatternFly glass theme is applied at the document root.
- * Used by components that adapt styling for glass theme (e.g. Accordion).
- *
- * @returns {boolean} - True if the glass theme class is present on the html element
- */
-export const hasGlassTheme = (): boolean => {
-  if (typeof document === 'undefined') {
-    return false;
-  }
-  const classList = document.documentElement?.classList;
-  return classList ? classList.contains('pf-v6-theme-glass') : false;
-};
-
-/**
  * Calculate the width of the text
  * Example:
  * getTextWidth('my text', node)

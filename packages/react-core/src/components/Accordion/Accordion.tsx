@@ -1,6 +1,5 @@
 import { css } from '@patternfly/react-styles';
 import styles from '@patternfly/react-styles/css/components/Accordion/accordion';
-import { hasGlassTheme } from '../../helpers/util';
 import { AccordionContext } from './AccordionContext';
 
 export interface AccordionProps extends React.HTMLProps<HTMLDListElement> {
@@ -16,11 +15,9 @@ export interface AccordionProps extends React.HTMLProps<HTMLDListElement> {
   asDefinitionList?: boolean;
   /** Flag to indicate the accordion had a border */
   isBordered?: boolean;
-  /**
-   * Flag to indicate if the accordion uses plain styling. Only applicable when the PatternFly glass
-   * theme is active (e.g. `pf-v6-theme-glass` on the document root); when the glass theme is not
-   * active, this prop has no effect.
-   */
+  /** Flag to prevent the accordion from automatically applying plain styling when glass theme is enabled. */
+  isNoPlainOnGlass?: boolean;
+  /** Flag to add plain styling to the accordion. */
   isPlain?: boolean;
   /** Display size variant. */
   displaySize?: 'default' | 'lg';
@@ -35,6 +32,7 @@ export const Accordion: React.FunctionComponent<AccordionProps> = ({
   headingLevel = 'h3',
   asDefinitionList = true,
   isBordered = false,
+  isNoPlainOnGlass = false,
   isPlain = false,
   displaySize = 'default',
   togglePosition = 'end',
@@ -46,7 +44,8 @@ export const Accordion: React.FunctionComponent<AccordionProps> = ({
       className={css(
         styles.accordion,
         isBordered && styles.modifiers.bordered,
-        !isPlain && hasGlassTheme() && styles.modifiers.noPlain,
+        isNoPlainOnGlass && styles.modifiers.noPlain,
+        isPlain && styles.modifiers.plain,
         togglePosition === 'start' && styles.modifiers.toggleStart,
         displaySize === 'lg' && styles.modifiers.displayLg,
         className
