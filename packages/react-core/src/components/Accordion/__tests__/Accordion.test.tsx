@@ -122,28 +122,79 @@ test('Renders with pf-m-bordered when isBordered=true', () => {
   expect(screen.getByText('Test')).toHaveClass('pf-m-bordered');
 });
 
-test('Renders without class pf-m-no-plain by default', () => {
+test(`Renders without class ${styles.modifiers.noPlain} by default`, () => {
   render(<Accordion>Test</Accordion>);
 
-  expect(screen.getByText('Test')).not.toHaveClass('pf-m-no-plain');
+  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.noPlain);
 });
 
-test('Renders with class pf-m-no-plain when isNoPlainOnGlass', () => {
+test(`Renders with class ${styles.modifiers.noPlain} when isNoPlainOnGlass`, () => {
   render(<Accordion isNoPlainOnGlass>Test</Accordion>);
 
-  expect(screen.getByText('Test')).toHaveClass('pf-m-no-plain');
+  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.noPlain);
 });
 
-test('Renders without class pf-m-plain by default', () => {
+test(`Renders without class ${styles.modifiers.plain} by default`, () => {
   render(<Accordion>Test</Accordion>);
 
-  expect(screen.getByText('Test')).not.toHaveClass('pf-m-plain');
+  expect(screen.getByText('Test')).not.toHaveClass(styles.modifiers.plain);
 });
 
-test('Renders with class pf-m-plain when isPlain', () => {
+test(`Renders with class ${styles.modifiers.plain} when isPlain`, () => {
   render(<Accordion isPlain>Test</Accordion>);
 
-  expect(screen.getByText('Test')).toHaveClass('pf-m-plain');
+  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.plain);
+});
+
+test('warns when both isPlain and isNoPlainOnGlass are true', () => {
+  const consoleWarning = jest.spyOn(console, 'warn').mockImplementation();
+
+  render(
+    <Accordion isPlain isNoPlainOnGlass>
+      Test
+    </Accordion>
+  );
+
+  expect(consoleWarning).toHaveBeenCalledWith(
+    `Accordion: When both isPlain and isNoPlainOnGlass are true, styling may conflict. It's recommended to pass only one prop according to the current theme.`
+  );
+
+  consoleWarning.mockRestore();
+});
+
+test(`applies both ${styles.modifiers.plain} and ${styles.modifiers.noPlain} when both isPlain and isNoPlainOnGlass are true`, () => {
+  const consoleWarning = jest.spyOn(console, 'warn').mockImplementation();
+
+  render(
+    <Accordion isPlain isNoPlainOnGlass>
+      Test
+    </Accordion>
+  );
+
+  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.plain);
+  expect(screen.getByText('Test')).toHaveClass(styles.modifiers.noPlain);
+
+  consoleWarning.mockRestore();
+});
+
+test('does not warn when only isNoPlainOnGlass is true', () => {
+  const consoleWarning = jest.spyOn(console, 'warn').mockImplementation();
+
+  render(<Accordion isNoPlainOnGlass>Test</Accordion>);
+
+  expect(consoleWarning).not.toHaveBeenCalled();
+
+  consoleWarning.mockRestore();
+});
+
+test('does not warn when only isPlain is true', () => {
+  const consoleWarning = jest.spyOn(console, 'warn').mockImplementation();
+
+  render(<Accordion isPlain>Test</Accordion>);
+
+  expect(consoleWarning).not.toHaveBeenCalled();
+
+  consoleWarning.mockRestore();
 });
 
 test('Renders without pf-m-display-lg by default', () => {

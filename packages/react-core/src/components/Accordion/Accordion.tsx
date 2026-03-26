@@ -15,9 +15,9 @@ export interface AccordionProps extends React.HTMLProps<HTMLDListElement> {
   asDefinitionList?: boolean;
   /** Flag to indicate the accordion had a border */
   isBordered?: boolean;
-  /** Flag to prevent the accordion from automatically applying plain styling when glass theme is enabled. */
+  /** @beta Flag to prevent the accordion from automatically applying plain styling when glass theme is enabled. */
   isNoPlainOnGlass?: boolean;
-  /** Flag to add plain styling to the accordion. */
+  /** @beta Flag to add plain styling to the accordion. */
   isPlain?: boolean;
   /** Display size variant. */
   displaySize?: 'default' | 'lg';
@@ -38,6 +38,13 @@ export const Accordion: React.FunctionComponent<AccordionProps> = ({
   togglePosition = 'end',
   ...props
 }: AccordionProps) => {
+  if (isPlain && isNoPlainOnGlass) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      `Accordion: When both isPlain and isNoPlainOnGlass are true, styling may conflict. It's recommended to pass only one prop according to the current theme.`
+    );
+  }
+
   const AccordionList: any = asDefinitionList ? 'dl' : 'div';
   return (
     <AccordionList
