@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.42](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.41...@patternfly/react-core@6.5.0-prerelease.42) (2026-03-27)
+
+### Features
+
+- **card:** add isGlass prop ([#12290](https://github.com/patternfly/patternfly-react/issues/12290)) ([f854fa6](https://github.com/patternfly/patternfly-react/commit/f854fa632902f79ec45da6aad1702699f8623e3d))
+
 # [6.5.0-prerelease.41](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.40...@patternfly/react-core@6.5.0-prerelease.41) (2026-03-25)
 
 ### Features
