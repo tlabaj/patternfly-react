@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.44](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-templates@6.5.0-prerelease.43...@patternfly/react-templates@6.5.0-prerelease.44) (2026-03-31)
+
+### Features
+
+- **icons:** update close icons to use the rh micron ([#12283](https://github.com/patternfly/patternfly-react/issues/12283)) ([fc82a9c](https://github.com/patternfly/patternfly-react/commit/fc82a9c646739a11732e7934d860f3913932168f))
+
 # [6.5.0-prerelease.43](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-templates@6.5.0-prerelease.42...@patternfly/react-templates@6.5.0-prerelease.43) (2026-03-31)
 
 **Note:** Version bump only for package @patternfly/react-templates

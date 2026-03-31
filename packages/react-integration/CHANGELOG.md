@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.10](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-integration@6.5.0-prerelease.9...@patternfly/react-integration@6.5.0-prerelease.10) (2026-03-31)
+
+### Features
+
+- **icons:** update close icons to use the rh micron ([#12283](https://github.com/patternfly/patternfly-react/issues/12283)) ([fc82a9c](https://github.com/patternfly/patternfly-react/commit/fc82a9c646739a11732e7934d860f3913932168f))
+
 # [6.5.0-prerelease.9](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-integration@6.5.0-prerelease.8...@patternfly/react-integration@6.5.0-prerelease.9) (2026-03-25)
 
 **Note:** Version bump only for package @patternfly/react-integration
