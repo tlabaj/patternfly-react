@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.43](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.42...@patternfly/react-core@6.5.0-prerelease.43) (2026-03-31)
+
+### Bug Fixes
+
+- **Popper:** add null & connected checks for document ([#12284](https://github.com/patternfly/patternfly-react/issues/12284)) ([600de1b](https://github.com/patternfly/patternfly-react/commit/600de1be47e94fd8aec75a4b34b4aa40fd6412ed))
+
 # [6.5.0-prerelease.42](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.41...@patternfly/react-core@6.5.0-prerelease.42) (2026-03-27)
 
 ### Features
