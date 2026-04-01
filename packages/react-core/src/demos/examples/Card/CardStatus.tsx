@@ -22,10 +22,8 @@ import {
   Icon
 } from '@patternfly/react-core';
 import { Table, Thead, Tbody, Tr, Th, Td, ExpandableRowContent } from '@patternfly/react-table';
-import BellIcon from '@patternfly/react-icons/dist/js/icons/bell-icon';
-import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
-import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-circle-icon';
-import ExclamationTriangleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-triangle-icon';
+import RhUiCheckCircleFillIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-check-circle-fill-icon';
+import RhUiErrorFillIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-error-fill-icon';
 import t_global_text_color_subtle from '@patternfly/react-tokens/dist/esm/t_global_text_color_subtle';
 
 export const CardStatus: React.FunctionComponent = () => {
@@ -139,7 +137,7 @@ export const CardStatus: React.FunctionComponent = () => {
           <Flex spaceItems={{ default: 'spaceItemsSm' }}>
             <FlexItem>
               <Icon status="success">
-                <CheckCircleIcon />
+                <RhUiCheckCircleFillIcon />
               </Icon>
             </FlexItem>
             <FlexItem>
@@ -151,7 +149,7 @@ export const CardStatus: React.FunctionComponent = () => {
           <Flex spaceItems={{ default: 'spaceItemsSm' }}>
             <FlexItem>
               <Icon status="danger">
-                <ExclamationCircleIcon />
+                <RhUiErrorFillIcon />
               </Icon>
             </FlexItem>
             <FlexItem>
@@ -167,7 +165,7 @@ export const CardStatus: React.FunctionComponent = () => {
           <Flex spaceItems={{ default: 'spaceItemsSm' }}>
             <FlexItem>
               <Icon status="danger">
-                <ExclamationCircleIcon />
+                <RhUiErrorFillIcon />
               </Icon>
             </FlexItem>
             <Flex direction={{ default: 'column' }} spaceItems={{ default: 'spaceItemsNone' }}>
@@ -184,7 +182,7 @@ export const CardStatus: React.FunctionComponent = () => {
           <Flex spaceItems={{ default: 'spaceItemsSm' }}>
             <FlexItem>
               <Icon status="success">
-                <CheckCircleIcon />
+                <RhUiCheckCircleFillIcon />
               </Icon>
             </FlexItem>
             <Flex direction={{ default: 'column' }} spaceItems={{ default: 'spaceItemsNone' }}>
@@ -206,21 +204,11 @@ export const CardStatus: React.FunctionComponent = () => {
       <FlexItem spacer={{ default: 'spacerMd' }}>
         <span>Notifications</span>
       </FlexItem>
-      <Label color="red" icon={<ExclamationCircleIcon />}>
-        1
-      </Label>
-      <Label color="orange" icon={<ExclamationTriangleIcon />}>
-        3
-      </Label>
-      <Label color="green" icon={<CheckCircleIcon />}>
-        3
-      </Label>
-      <Label color="blue" icon={<ExclamationCircleIcon />}>
-        3
-      </Label>
-      <Label color="green" icon={<BellIcon />}>
-        3
-      </Label>
+      <Label status="danger">1</Label>
+      <Label status="warning">3</Label>
+      <Label status="success">3</Label>
+      <Label status="danger">3</Label>
+      <Label status="info">3</Label>
     </Flex>
   );
 
