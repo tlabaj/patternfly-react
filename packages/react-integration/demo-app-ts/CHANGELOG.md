@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.75](https://github.com/patternfly/patternfly-react/compare/demo-app-ts@6.5.0-prerelease.74...demo-app-ts@6.5.0-prerelease.75) (2026-04-01)
+
+### Features
+
+- **icons:** updated caret icons to RH microns ([#12298](https://github.com/patternfly/patternfly-react/issues/12298)) ([688a5af](https://github.com/patternfly/patternfly-react/commit/688a5afb40c28f0b293301d1e68f0359b7a0604d))
+
 # [6.5.0-prerelease.74](https://github.com/patternfly/patternfly-react/compare/demo-app-ts@6.5.0-prerelease.73...demo-app-ts@6.5.0-prerelease.74) (2026-04-01)
 
 **Note:** Version bump only for package demo-app-ts
