@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.47](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.46...@patternfly/react-core@6.5.0-prerelease.47) (2026-04-01)
+
+### Bug Fixes
+
+- **Menu:** adjust initially drilled-in root menu height ([#12294](https://github.com/patternfly/patternfly-react/issues/12294)) ([5c08f12](https://github.com/patternfly/patternfly-react/commit/5c08f125f7505e15bfe5c2dfb5bc5737a06b6f3a))
+
 # [6.5.0-prerelease.46](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.45...@patternfly/react-core@6.5.0-prerelease.46) (2026-04-01)
 
 ### Features
