@@ -598,7 +598,7 @@ class Tabs extends Component<TabsProps, TabsState> {
                   <GenerateId>
                     {(randomId) => (
                       <div className={css(styles.tabsToggle)}>
-                        <div className={css(styles.tabsToggleButton)}>
+                        <div className={'pf-v6-c-tabs__toggle-button'}>
                           <Button
                             onClick={(event) => toggleTabs(event, !isExpandedLocal)}
                             variant="plain"
