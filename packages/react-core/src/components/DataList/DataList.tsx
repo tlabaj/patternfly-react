@@ -33,7 +33,7 @@ export interface DataListProps extends React.HTMLProps<HTMLUListElement> {
   isCompact?: boolean;
   /** @beta Flag indicating if data list should have plain styling with a transparent background */
   isPlain?: boolean;
-  /** @beta Flag to prevent the data list from automatically applying plain styling when glass theme is enabled. When both this and isPlain are true, isPlain takes precedence. */
+  /** @beta Flag to prevent the data list from automatically applying plain styling when glass theme is enabled. */
   isNoPlainOnGlass?: boolean;
   /** Specifies the grid breakpoints  */
   gridBreakpoint?: 'none' | 'always' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
@@ -71,13 +71,6 @@ export const DataListBase: React.FunctionComponent<DataListProps> = ({
   innerRef,
   ...props
 }: DataListProps) => {
-  if (isPlain && isNoPlainOnGlass) {
-    // eslint-disable-next-line no-console
-    console.warn(
-      `DataList: When both isPlain and isNoPlainOnGlass are true, isPlain will take precedence and isNoPlainOnGlass will have no effect. It's recommended to pass only one prop according to the current theme.`
-    );
-  }
-
   const isSelectable = onSelectDataListItem !== undefined;
 
   const updateSelectedDataListItem = (event: React.MouseEvent | React.KeyboardEvent, id: string) => {
@@ -98,7 +91,7 @@ export const DataListBase: React.FunctionComponent<DataListProps> = ({
           styles.dataList,
           isCompact && styles.modifiers.compact,
           isPlain && styles.modifiers.plain,
-          isNoPlainOnGlass && styles.modifiers.noPlain,
+          isNoPlainOnGlass && styles.modifiers.noPlainOnGlass,
           gridBreakpointClasses[gridBreakpoint],
           wrapModifier && styles.modifiers[wrapModifier],
           className

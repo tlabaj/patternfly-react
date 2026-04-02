@@ -78,41 +78,16 @@ test(`Renders with class ${styles.modifiers.plain} when isPlain is true`, () => 
   expect(screen.getByLabelText('list')).toHaveClass(styles.modifiers.plain);
 });
 
-test(`Renders with ${styles.modifiers.noPlain} when isNoPlainOnGlass is true`, () => {
+test(`Renders with ${styles.modifiers.noPlainOnGlass} when isNoPlainOnGlass is true`, () => {
   render(<DataList aria-label="list" isNoPlainOnGlass />);
-  expect(screen.getByLabelText('list')).toHaveClass(styles.modifiers.noPlain);
+  expect(screen.getByLabelText('list')).toHaveClass(styles.modifiers.noPlainOnGlass);
 });
 
-test('Warns when both isPlain and isNoPlainOnGlass are true', () => {
-  const warnSpy = jest.spyOn(global.console, 'warn').mockImplementation(() => {});
-
+test(`Renders with both ${styles.modifiers.plain} and ${styles.modifiers.noPlainOnGlass} when isPlain and isNoPlainOnGlass are true`, () => {
   render(<DataList aria-label="list" isPlain isNoPlainOnGlass />);
-
-  expect(warnSpy).toHaveBeenCalledWith(
-    `DataList: When both isPlain and isNoPlainOnGlass are true, isPlain will take precedence and isNoPlainOnGlass will have no effect. It's recommended to pass only one prop according to the current theme.`
-  );
-
-  warnSpy.mockRestore();
-});
-
-test('Does not warn when only isPlain is true', () => {
-  const warnSpy = jest.spyOn(global.console, 'warn').mockImplementation(() => {});
-
-  render(<DataList aria-label="list" isPlain />);
-
-  expect(warnSpy).not.toHaveBeenCalled();
-
-  warnSpy.mockRestore();
-});
-
-test('Does not warn when only isNoPlainOnGlass is true', () => {
-  const warnSpy = jest.spyOn(global.console, 'warn').mockImplementation(() => {});
-
-  render(<DataList aria-label="list" isNoPlainOnGlass />);
-
-  expect(warnSpy).not.toHaveBeenCalled();
-
-  warnSpy.mockRestore();
+  const list = screen.getByLabelText('list');
+  expect(list).toHaveClass(styles.modifiers.plain);
+  expect(list).toHaveClass(styles.modifiers.noPlainOnGlass);
 });
 
 test('Renders with a hidden input to improve a11y when onSelectableRowChange is passed', () => {

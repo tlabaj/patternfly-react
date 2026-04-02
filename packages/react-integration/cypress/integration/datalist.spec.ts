@@ -3,7 +3,32 @@ describe('Data List Demo Test', () => {
     cy.visit('http://localhost:3000/data-list-demo-nav-link');
   });
 
+  it('in glass theme, does not apply glass plain transparent background when pf-m-no-plain-on-glass is present (even with pf-m-plain)', () => {
+    cy.visit('http://localhost:3000/data-list-demo-nav-link');
+    cy.document().then((doc) => {
+      doc.documentElement.classList.add('pf-v6-theme-glass');
+    });
+
+    cy.get('[data-testid="data-list-glass-plain-both"]')
+      .should('have.class', 'pf-m-no-plain-on-glass')
+      .and('have.class', 'pf-m-plain');
+
+    /**
+     * This test fails due to a css bug.
+     */
+    cy.get('[data-testid="data-list-glass-plain-both"]').then(($el) => {
+      const el = $el[0];
+      const win = el.ownerDocument.defaultView;
+      if (!win) {
+        throw new Error('expected window');
+      }
+      const bg = win.getComputedStyle(el).backgroundColor;
+      expect(bg).not.to.match(/rgba\(0,\s*0,\s*0,\s*0\)|transparent/);
+    });
+  });
+
   it('Verify rows selectable', () => {
+    cy.visit('http://localhost:3000/data-list-demo-nav-link');
     cy.get('#row1.pf-m-clickable').should('exist');
     cy.get('#row2.pf-m-clickable').should('exist');
 
