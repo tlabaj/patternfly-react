@@ -38,20 +38,13 @@ export const Accordion: React.FunctionComponent<AccordionProps> = ({
   togglePosition = 'end',
   ...props
 }: AccordionProps) => {
-  if (isPlain && isNoPlainOnGlass) {
-    // eslint-disable-next-line no-console
-    console.warn(
-      `Accordion: When both isPlain and isNoPlainOnGlass are true, styling may conflict. It's recommended to pass only one prop according to the current theme.`
-    );
-  }
-
   const AccordionList: any = asDefinitionList ? 'dl' : 'div';
   return (
     <AccordionList
       className={css(
         styles.accordion,
         isBordered && styles.modifiers.bordered,
-        isNoPlainOnGlass && styles.modifiers.noPlain,
+        isNoPlainOnGlass && styles.modifiers.noPlainOnGlass,
         isPlain && styles.modifiers.plain,
         togglePosition === 'start' && styles.modifiers.toggleStart,
         displaySize === 'lg' && styles.modifiers.displayLg,
