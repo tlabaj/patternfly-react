@@ -23,7 +23,8 @@ describe('Data List Demo Test', () => {
         throw new Error('expected window');
       }
       const bg = win.getComputedStyle(el).backgroundColor;
-      expect(bg).not.to.match(/rgba\(0,\s*0,\s*0,\s*0\)|transparent/);
+      const fullyTransparent = bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)' || bg === 'rgba(0,0,0,0)';
+      expect(fullyTransparent, `expected non-transparent background, got ${bg}`).to.eq(false);
     });
   });
 
