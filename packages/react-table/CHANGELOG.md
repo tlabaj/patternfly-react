@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.50](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-table@6.5.0-prerelease.49...@patternfly/react-table@6.5.0-prerelease.50) (2026-04-03)
+
+### Features
+
+- **Table:** update isPlain to apply no-plain when false ([#12287](https://github.com/patternfly/patternfly-react/issues/12287)) ([c9853de](https://github.com/patternfly/patternfly-react/commit/c9853de53896de7e1ab494fbb0fb31a11086417c))
+
 # [6.5.0-prerelease.49](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-table@6.5.0-prerelease.48...@patternfly/react-table@6.5.0-prerelease.49) (2026-04-01)
 
 **Note:** Version bump only for package @patternfly/react-table

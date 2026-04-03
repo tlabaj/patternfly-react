@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.20](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-icons@6.5.0-prerelease.19...@patternfly/react-icons@6.5.0-prerelease.20) (2026-04-03)
+
+### Bug Fixes
+
+- **react-icons:** add sideEffects: false to dist/esm/package.json ([#12314](https://github.com/patternfly/patternfly-react/issues/12314)) ([edfa3f0](https://github.com/patternfly/patternfly-react/commit/edfa3f0ac52aa9170b50a051e7ef72f2403f92a8))
+
 # [6.5.0-prerelease.19](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-icons@6.5.0-prerelease.18...@patternfly/react-icons@6.5.0-prerelease.19) (2026-04-01)
 
 **Note:** Version bump only for package @patternfly/react-icons

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.49](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.48...@patternfly/react-core@6.5.0-prerelease.49) (2026-04-03)
+
+### Features
+
+- **Wizard:** added plain styling ([#12289](https://github.com/patternfly/patternfly-react/issues/12289)) ([4968f3c](https://github.com/patternfly/patternfly-react/commit/4968f3c482dc6d9d84b063c825a6d766908c0e13))
+
 # [6.5.0-prerelease.48](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.47...@patternfly/react-core@6.5.0-prerelease.48) (2026-04-01)
 
 **Note:** Version bump only for package @patternfly/react-core
