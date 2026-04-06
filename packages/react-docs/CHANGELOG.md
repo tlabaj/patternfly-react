@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.5.0-prerelease.59](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-docs@7.5.0-prerelease.58...@patternfly/react-docs@7.5.0-prerelease.59) (2026-04-06)
+
+### Features
+
+- **Page:** added styles for glass ([#12293](https://github.com/patternfly/patternfly-react/issues/12293)) ([1f7485b](https://github.com/patternfly/patternfly-react/commit/1f7485b291b5da4bb80c596a5efcc19217cabc2c))
+
 # [7.5.0-prerelease.58](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-docs@7.5.0-prerelease.57...@patternfly/react-docs@7.5.0-prerelease.58) (2026-04-03)
 
 **Note:** Version bump only for package @patternfly/react-docs

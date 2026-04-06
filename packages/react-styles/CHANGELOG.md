@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.16](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-styles@6.5.0-prerelease.15...@patternfly/react-styles@6.5.0-prerelease.16) (2026-04-06)
+
+### Features
+
+- **Page:** added styles for glass ([#12293](https://github.com/patternfly/patternfly-react/issues/12293)) ([1f7485b](https://github.com/patternfly/patternfly-react/commit/1f7485b291b5da4bb80c596a5efcc19217cabc2c))
+
 # [6.5.0-prerelease.15](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-styles@6.5.0-prerelease.14...@patternfly/react-styles@6.5.0-prerelease.15) (2026-04-01)
 
 ### Bug Fixes
