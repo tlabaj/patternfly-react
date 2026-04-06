@@ -382,7 +382,7 @@ export const DrawerPanelContent: React.FunctionComponent<DrawerPanelContentProps
         hasNoGlass && 'pf-m-no-glass',
         isGlass && styles.modifiers.glass,
         isPlain && styles.modifiers.plain,
-        isNoPlainOnGlass && styles.modifiers.noPlain,
+        isNoPlainOnGlass && styles.modifiers.noPlainOnGlass,
         hasNoBorder && styles.modifiers.noBorder,
         formatBreakpointMods(widths, styles),
         colorVariant === DrawerColorVariant.noBackground && styles.modifiers.noBackground,

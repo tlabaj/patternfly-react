@@ -118,6 +118,18 @@ export class DrawerDemo extends Component<DrawerProps, DrawerDemoState> {
     const drawerContent =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante, id vehicula ex accumsan ut. Morbi viverra, eros vel porttitor facilisis, eros purus aliquet erat,nec lobortis felis elit pulvinar sem. Vivamus vulputate, risus eget commodo eleifend, eros nibh porta quam, vitae lacinia leo libero at magna. Maecenas aliquam sagittis orci, et posuere nisi ultrices sit amet. Aliquam ex odio, malesuada sed posuere quis, pellentesque at mauris. Phasellus venenatis massa ex, eget pulvinar libero auctor pretium. Aliquam erat volutpat. Duis euismod justo in quam ullamcorper, in commodo massa vulputate.';
 
+    /**
+     * Repro for Core CSS: with glass theme (`pf-v6-theme-glass`, applied in Cypress on `html`), `isGlass` (pf-m-glass),
+     * and `isPlain` (pf-m-plain), `pf-m-no-plain-on-glass` may not apply — see drawer Cypress test.
+     */
+    const glassThemePlainComboPanelContent = (
+      <DrawerPanelContent id="drawer-panel-glass-plain-combo" isPlain isNoPlainOnGlass isGlass>
+        <DrawerHead>
+          <span>Glass theme plain / no-plain-on-glass combo</span>
+        </DrawerHead>
+      </DrawerPanelContent>
+    );
+
     return (
       <>
         <Button id="toggleButton" onClick={this.onClick}>
@@ -151,6 +163,13 @@ export class DrawerDemo extends Component<DrawerProps, DrawerDemoState> {
             <DrawerContentBody>{drawerContent}</DrawerContentBody>
           </DrawerContent>
         </Drawer>
+        <div id="drawer-glass-plain-combo-container">
+          <Drawer id="drawer-glass-plain-combo" isExpanded style={{ minHeight: '120px', height: '120px' }}>
+            <DrawerContent colorVariant={DrawerColorVariant.default} panelContent={glassThemePlainComboPanelContent}>
+              <DrawerContentBody>Glass theme + isPlain + isNoPlainOnGlass + isGlass demo</DrawerContentBody>
+            </DrawerContent>
+          </Drawer>
+        </div>
       </>
     );
   }

@@ -209,12 +209,12 @@ test(`Renders with class ${styles.modifiers.plain} when isPlain is true`, () => 
   expect(screen.getByText('Drawer panel content')).toHaveClass(styles.modifiers.plain);
 });
 
-test(`Renders with class ${styles.modifiers.noPlain} when isNoPlainOnGlass is true`, () => {
+test(`Renders with class ${styles.modifiers.noPlainOnGlass} when isNoPlainOnGlass is true`, () => {
   render(
     <Drawer isExpanded>
       <DrawerPanelContent isNoPlainOnGlass>Drawer panel content</DrawerPanelContent>
     </Drawer>
   );
 
-  expect(screen.getByText('Drawer panel content')).toHaveClass(styles.modifiers.noPlain);
+  expect(screen.getByText('Drawer panel content')).toHaveClass(styles.modifiers.noPlainOnGlass);
 });

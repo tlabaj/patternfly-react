@@ -1,6 +1,61 @@
 describe('Drawer Demo Test', () => {
+  afterEach(() => {
+    cy.document().then((doc) => {
+      doc.documentElement.classList.remove('pf-v6-theme-glass');
+    });
+  });
+
   it('Navigate to the drawer demo', () => {
     cy.visit('http://localhost:3000/drawer-demo-nav-link');
+  });
+
+  // Known PatternFly CSS bug: when `pf-v6-theme-glass`, `pf-m-glass` (isGlass), and `pf-m-plain` are all active,
+  // `pf-m-no-plain-on-glass` does not take effect — plain-under-glass wins and no-plain-on-glass cannot restore
+  // the intended glass panel treatment. This test asserts the corrected outcome (semi-transparent background)
+  // and fails until Core CSS fixes selector/specificity for that combination.
+  it('glass theme + plain + glass: no-plain-on-glass should yield semi-transparent panel background (fails until CSS fix)', () => {
+    cy.document().then((doc) => {
+      doc.documentElement.classList.add('pf-v6-theme-glass');
+    });
+    cy.get('html').should('have.class', 'pf-v6-theme-glass');
+
+    cy.get('#drawer-panel-glass-plain-combo.pf-v6-c-drawer__panel')
+      .should('be.visible')
+      .should('have.class', 'pf-m-glass')
+      .and('have.class', 'pf-m-plain')
+      .and('have.class', 'pf-m-no-plain-on-glass');
+
+    cy.get('#drawer-panel-glass-plain-combo').within(() => {
+      cy.contains('Glass theme plain / no-plain-on-glass combo');
+    });
+
+    // When the bug is fixed, no-plain-on-glass should override plain-under-glass and surface a non-opaque background.
+    cy.get('#drawer-panel-glass-plain-combo').should(($el) => {
+      const bg = window.getComputedStyle($el[0]).backgroundColor;
+
+      const rgbaAlpha = (color: string): number | undefined => {
+        if (color === 'transparent') {
+          return 0;
+        }
+        if (!color.startsWith('rgba(') || !color.endsWith(')')) {
+          return undefined;
+        }
+        const inner = color.slice('rgba('.length, -1);
+        const parts = inner.split(',').map((p) => p.trim());
+        if (parts.length !== 4) {
+          return undefined;
+        }
+        return parseFloat(parts[3]);
+      };
+
+      const alpha = rgbaAlpha(bg);
+      const hasSemiTransparentBackground = alpha !== undefined && alpha < 1;
+      if (!hasSemiTransparentBackground) {
+        throw new Error(
+          `expected no-plain-on-glass to win over plain+glass under theme (semi-transparent background, alpha < 1); got backgroundColor=${bg}`
+        );
+      }
+    });
   });
 
   it('Verify focus is automatically handled with focus trap enabled', () => {
