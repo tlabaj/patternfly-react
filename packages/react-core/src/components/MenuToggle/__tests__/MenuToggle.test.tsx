@@ -57,6 +57,13 @@ describe('Old Snapshot tests - remove when refactoring', () => {
 
 const toggleVariants = ['default', 'plain', 'primary', 'plainText', 'secondary', 'typeahead'];
 
+test(`Renders with classes ${styles.modifiers.plain} and ${styles.modifiers.text} when variant="plainText" is passed`, () => {
+  render(<MenuToggle variant="plainText">Toggle</MenuToggle>);
+  const toggle = screen.getByRole('button');
+  expect(toggle).toHaveClass(styles.modifiers.plain);
+  expect(toggle).toHaveClass(styles.modifiers.text);
+});
+
 test(`Renders with class ${styles.modifiers.small} when size="sm" is passed`, () => {
   render(<MenuToggle size="sm">Toggle</MenuToggle>);
   expect(screen.getByRole('button')).toHaveClass(styles.modifiers.small);
@@ -99,6 +106,16 @@ test('split toggle passes onClick', async () => {
 
   await user.click(screen.getByRole(`button`) as Element);
   expect(mockClick).toHaveBeenCalled();
+});
+
+test(`Renders with class ${styles.modifiers.form} when isInForm is passed`, () => {
+  render(<MenuToggle isInForm>Toggle</MenuToggle>);
+  expect(screen.getByRole('button')).toHaveClass(styles.modifiers.form);
+});
+
+test(`Does not render class ${styles.modifiers.form} when isInForm is false`, () => {
+  render(<MenuToggle isInForm={false}>Toggle</MenuToggle>);
+  expect(screen.getByRole('button')).not.toHaveClass(styles.modifiers.form);
 });
 
 test(`Renders with class ${styles.modifiers.placeholder} when isPlaceholder is passed`, () => {
