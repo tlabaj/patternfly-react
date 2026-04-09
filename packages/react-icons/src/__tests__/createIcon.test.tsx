@@ -1,5 +1,7 @@
+// eslint-disable-next-line no-restricted-imports -- test file excluded from package tsconfig; default import satisfies TS/JSX
+import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { IconDefinition, CreateIconProps, createIcon, SVGPathObject } from '../createIcon';
+import { IconDefinition, CreateIconProps, createIcon, LegacyFlatIconDefinition, SVGPathObject } from '../createIcon';
 
 const multiPathIcon: IconDefinition = {
   name: 'IconName',
@@ -57,7 +59,37 @@ test('sets correct viewBox', () => {
 
 test('sets correct svgPath if string', () => {
   render(<SVGIcon />);
-  expect(screen.getByRole('img', { hidden: true }).querySelector('path')).toHaveAttribute('d', iconDef.svgPath);
+  expect(screen.getByRole('img', { hidden: true }).querySelector('path')).toHaveAttribute(
+    'd',
+    singlePathIcon.svgPathData
+  );
+});
+
+test('accepts legacy flat createIcon({ svgPath }) shape', () => {
+  const legacyDef: LegacyFlatIconDefinition = {
+    name: 'LegacyIcon',
+    width: 10,
+    height: 20,
+    svgPath: 'legacy-path',
+    svgClassName: 'legacy-svg'
+  };
+  const LegacySVGIcon = createIcon(legacyDef);
+  render(<LegacySVGIcon />);
+  expect(screen.getByRole('img', { hidden: true }).querySelector('path')).toHaveAttribute('d', 'legacy-path');
+});
+
+test('accepts CreateIconProps with nested icon using deprecated svgPath field', () => {
+  const nestedLegacyPath: CreateIconProps = {
+    name: 'NestedLegacyPathIcon',
+    icon: {
+      width: 8,
+      height: 8,
+      svgPath: 'nested-legacy-d'
+    }
+  };
+  const NestedIcon = createIcon(nestedLegacyPath);
+  render(<NestedIcon />);
+  expect(screen.getByRole('img', { hidden: true }).querySelector('path')).toHaveAttribute('d', 'nested-legacy-d');
 });
 
 test('sets correct svgClassName by default', () => {
@@ -126,4 +158,78 @@ test('aria-labelledby matches title id', () => {
 test('additional props should be spread to the root svg element', () => {
   render(<SVGIcon data-testid="icon" />);
   expect(screen.getByTestId('icon')).toBeInTheDocument();
+});
+
+describe('rh-ui mapping: nested SVGs, set prop, and warnings', () => {
+  const defaultPath = 'M0 0-default';
+  const rhUiPath = 'M0 0-rh-ui';
+
+  const defaultIconDef: IconDefinition = {
+    name: 'DefaultVariant',
+    width: 16,
+    height: 16,
+    svgPathData: defaultPath
+  };
+
+  const rhUiIconDef: IconDefinition = {
+    name: 'RhUiVariant',
+    width: 16,
+    height: 16,
+    svgPathData: rhUiPath
+  };
+
+  const dualConfig: CreateIconProps = {
+    name: 'DualMappedIcon',
+    icon: defaultIconDef,
+    rhUiIcon: rhUiIconDef
+  };
+
+  const DualMappedIcon = createIcon(dualConfig);
+
+  test('renders two nested inner svgs when rhUiIcon is set and `set` is omitted (swap layout)', () => {
+    render(<DualMappedIcon />);
+    const root = screen.getByRole('img', { hidden: true });
+    expect(root).toHaveClass('pf-v6-svg');
+    const innerSvgs = root.querySelectorAll(':scope > svg');
+    expect(innerSvgs).toHaveLength(2);
+    expect(root?.querySelector('.pf-v6-icon-default path')).toHaveAttribute('d', defaultPath);
+    expect(root?.querySelector('.pf-v6-icon-rh-ui path')).toHaveAttribute('d', rhUiPath);
+  });
+
+  test('set="default" renders a single flat svg using the default icon paths', () => {
+    render(<DualMappedIcon set="default" />);
+    const root = screen.getByRole('img', { hidden: true });
+    expect(root.querySelectorAll(':scope > svg')).toHaveLength(0);
+    expect(root).toHaveAttribute('viewBox', '0 0 16 16');
+    expect(root.querySelector('path')).toHaveAttribute('d', defaultPath);
+    expect(root.querySelectorAll('svg')).toHaveLength(0);
+  });
+
+  test('set="rh-ui" renders a single flat svg using the rh-ui icon paths', () => {
+    render(<DualMappedIcon set="rh-ui" />);
+    const root = screen.getByRole('img', { hidden: true });
+    expect(root.querySelectorAll(':scope > svg')).toHaveLength(0);
+    expect(root.querySelector('path')).toHaveAttribute('d', rhUiPath);
+    expect(root.querySelectorAll('svg')).toHaveLength(0);
+  });
+
+  test('set="rh-ui" with no rhUiIcon mapping falls back to default and warns', () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const IconNoRhMapping = createIcon({
+      name: 'NoRhMappingIcon',
+      icon: defaultIconDef,
+      rhUiIcon: null
+    });
+
+    render(<IconNoRhMapping set="rh-ui" />);
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      'Set "rh-ui" was provided for NoRhMappingIcon, but no rh-ui icon data exists for this icon. The default icon will be rendered.'
+    );
+    const root = screen.getByRole('img', { hidden: true });
+    expect(root.querySelector('path')).toHaveAttribute('d', defaultPath);
+    expect(root.querySelectorAll('svg')).toHaveLength(0);
+
+    warnSpy.mockRestore();
+  });
 });
