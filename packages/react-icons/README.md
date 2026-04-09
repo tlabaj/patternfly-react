@@ -7,7 +7,7 @@ PatternFly Icons as React Components.
 ```tsx
 import RhMicronsCloseIcon from '@patternfly/react-icons/dist/esm/icons/times-icon';
 
-const closeIcon = <TimesIcon />;
+const closeIcon = <RhMicronsCloseIcon />;
 ```
 
 For a list of the available icons please refer to the [PatternFly react docs](https://pf-react-staging.patternfly.org/icons)
