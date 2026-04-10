@@ -41,11 +41,11 @@ export interface LabelProps extends React.HTMLProps<HTMLSpanElement> {
   /** Additional classes added to the label. */
   className?: string;
   /** Color of the label. */
-  color?: LabelColor | 'blue' | 'teal' | 'green' | 'orange' | 'purple' | 'red' | 'orangered' | 'grey' | 'yellow';
+  color?: 'blue' | 'teal' | 'green' | 'orange' | 'purple' | 'red' | 'orangered' | 'grey' | 'yellow';
   /** Variant of the label. */
   variant?: 'outline' | 'filled' | 'overflow' | 'add';
   /** Status of the label with a respective icon and color. Overrides the color set by the color property. */
-  status?: LabelStatus | 'success' | 'warning' | 'danger' | 'info' | 'custom';
+  status?: 'success' | 'warning' | 'danger' | 'info' | 'custom';
   /** Flag indicating the label is compact. */
   isCompact?: boolean;
   /** Flag indicating the label is disabled. Works only on clickable labels, so either href or onClick props must be passed in. */
