@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.54](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-code-editor@6.5.0-prerelease.53...@patternfly/react-code-editor@6.5.0-prerelease.54) (2026-04-10)
+
+### Features
+
+- **Icons:** updated cog icons to rh settings ([#12345](https://github.com/patternfly/patternfly-react/issues/12345)) ([190da46](https://github.com/patternfly/patternfly-react/commit/190da4621acef4edd1697bb8ebccfd02299ae870))
+
 # [6.5.0-prerelease.53](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-code-editor@6.5.0-prerelease.52...@patternfly/react-code-editor@6.5.0-prerelease.53) (2026-04-06)
 
 **Note:** Version bump only for package @patternfly/react-code-editor

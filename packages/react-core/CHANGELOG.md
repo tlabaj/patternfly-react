@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.51](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.50...@patternfly/react-core@6.5.0-prerelease.51) (2026-04-10)
+
+### Features
+
+- **Icons:** updated cog icons to rh settings ([#12345](https://github.com/patternfly/patternfly-react/issues/12345)) ([190da46](https://github.com/patternfly/patternfly-react/commit/190da4621acef4edd1697bb8ebccfd02299ae870))
+
 # [6.5.0-prerelease.50](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.49...@patternfly/react-core@6.5.0-prerelease.50) (2026-04-06)
 
 ### Features
