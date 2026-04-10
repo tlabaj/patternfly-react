@@ -13,17 +13,39 @@ import RhUiErrorFillIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-erro
 import RhUiWarningFillIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-warning-fill-icon';
 import RhUiInformationFillIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-information-fill-icon';
 
+/** Semantic status for labels (default icon and status styling). */
+export enum LabelStatus {
+  success = 'success',
+  warning = 'warning',
+  danger = 'danger',
+  info = 'info',
+  custom = 'custom'
+}
+
+/** Label palette color when not using the `status` prop. */
+export enum LabelColor {
+  blue = 'blue',
+  teal = 'teal',
+  green = 'green',
+  orange = 'orange',
+  purple = 'purple',
+  red = 'red',
+  orangered = 'orangered',
+  grey = 'grey',
+  yellow = 'yellow'
+}
+
 export interface LabelProps extends React.HTMLProps<HTMLSpanElement> {
   /** Content rendered inside the label. */
   children?: React.ReactNode;
   /** Additional classes added to the label. */
   className?: string;
   /** Color of the label. */
-  color?: 'blue' | 'teal' | 'green' | 'orange' | 'purple' | 'red' | 'orangered' | 'grey' | 'yellow';
+  color?: LabelColor | 'blue' | 'teal' | 'green' | 'orange' | 'purple' | 'red' | 'orangered' | 'grey' | 'yellow';
   /** Variant of the label. */
   variant?: 'outline' | 'filled' | 'overflow' | 'add';
   /** Status of the label with a respective icon and color. Overrides the color set by the color property. */
-  status?: 'success' | 'warning' | 'danger' | 'info' | 'custom';
+  status?: LabelStatus | 'success' | 'warning' | 'danger' | 'info' | 'custom';
   /** Flag indicating the label is compact. */
   isCompact?: boolean;
   /** Flag indicating the label is disabled. Works only on clickable labels, so either href or onClick props must be passed in. */
@@ -82,30 +104,30 @@ export interface LabelProps extends React.HTMLProps<HTMLSpanElement> {
   }) => React.ReactNode;
 }
 
-const colorStyles = {
-  blue: styles.modifiers.blue,
-  teal: styles.modifiers.teal,
-  green: styles.modifiers.green,
-  orange: styles.modifiers.orange,
-  purple: styles.modifiers.purple,
-  red: styles.modifiers.red,
-  orangered: styles.modifiers.orangered,
-  yellow: styles.modifiers.yellow,
-  grey: ''
+const colorStyles: Record<LabelColor, string> = {
+  [LabelColor.blue]: styles.modifiers.blue,
+  [LabelColor.teal]: styles.modifiers.teal,
+  [LabelColor.green]: styles.modifiers.green,
+  [LabelColor.orange]: styles.modifiers.orange,
+  [LabelColor.purple]: styles.modifiers.purple,
+  [LabelColor.red]: styles.modifiers.red,
+  [LabelColor.orangered]: styles.modifiers.orangered,
+  [LabelColor.yellow]: styles.modifiers.yellow,
+  [LabelColor.grey]: ''
 };
 
-const statusIcons = {
-  success: <RhUiCheckCircleFillIcon />,
-  warning: <RhUiWarningFillIcon />,
-  danger: <RhUiErrorFillIcon />,
-  info: <RhUiInformationFillIcon />,
-  custom: <RhUiNotificationFillIcon />
+const statusIcons: Record<LabelStatus, React.ReactNode> = {
+  [LabelStatus.success]: <RhUiCheckCircleFillIcon />,
+  [LabelStatus.warning]: <RhUiWarningFillIcon />,
+  [LabelStatus.danger]: <RhUiErrorFillIcon />,
+  [LabelStatus.info]: <RhUiInformationFillIcon />,
+  [LabelStatus.custom]: <RhUiNotificationFillIcon />
 };
 
 export const Label: React.FunctionComponent<LabelProps> = ({
   children,
   className = '',
-  color = 'grey',
+  color = LabelColor.grey,
   variant = 'filled',
   status,
   isCompact = false,
