@@ -1,5 +1,3 @@
-// eslint-disable-next-line no-restricted-imports -- test file excluded from package tsconfig; default import satisfies TS/JSX
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { IconDefinition, CreateIconProps, createIcon, LegacyFlatIconDefinition, SVGPathObject } from '../createIcon';
 
@@ -105,6 +103,17 @@ test('sets svgClassName when noDefaultStyle is false', () => {
 test('does not set svgClassName when noDefaultStyle is true', () => {
   render(<RhStandardIcon noDefaultStyle />);
   expect(screen.getByRole('img', { hidden: true })).not.toHaveClass('pf-v6-icon-rh-standard');
+});
+
+test('throws when nested CreateIconProps omits icon', () => {
+  expect(() =>
+    createIcon({
+      name: 'MissingDefaultIcon',
+      rhUiIcon: null
+    })
+  ).toThrow(
+    '@patternfly/react-icons: createIcon requires an `icon` definition when using nested CreateIconProps (name: MissingDefaultIcon).'
+  );
 });
 
 test('sets correct svgPath if array', () => {
@@ -215,21 +224,23 @@ describe('rh-ui mapping: nested SVGs, set prop, and warnings', () => {
 
   test('set="rh-ui" with no rhUiIcon mapping falls back to default and warns', () => {
     const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    const IconNoRhMapping = createIcon({
-      name: 'NoRhMappingIcon',
-      icon: defaultIconDef,
-      rhUiIcon: null
-    });
+    try {
+      const IconNoRhMapping = createIcon({
+        name: 'NoRhMappingIcon',
+        icon: defaultIconDef,
+        rhUiIcon: null
+      });
 
-    render(<IconNoRhMapping set="rh-ui" />);
+      render(<IconNoRhMapping set="rh-ui" />);
 
-    expect(warnSpy).toHaveBeenCalledWith(
-      'Set "rh-ui" was provided for NoRhMappingIcon, but no rh-ui icon data exists for this icon. The default icon will be rendered.'
-    );
-    const root = screen.getByRole('img', { hidden: true });
-    expect(root.querySelector('path')).toHaveAttribute('d', defaultPath);
-    expect(root.querySelectorAll('svg')).toHaveLength(0);
-
-    warnSpy.mockRestore();
+      expect(warnSpy).toHaveBeenCalledWith(
+        'Set "rh-ui" was provided for NoRhMappingIcon, but no rh-ui icon data exists for this icon. The default icon will be rendered.'
+      );
+      const root = screen.getByRole('img', { hidden: true });
+      expect(root.querySelector('path')).toHaveAttribute('d', defaultPath);
+      expect(root.querySelectorAll('svg')).toHaveLength(0);
+    } finally {
+      warnSpy.mockRestore();
+    }
   });
 });
