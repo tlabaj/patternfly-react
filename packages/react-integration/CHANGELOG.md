@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.14](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-integration@6.5.0-prerelease.13...@patternfly/react-integration@6.5.0-prerelease.14) (2026-04-13)
+
+### Features
+
+- **Data list:** Add isNoPlainOnGlass prop to add pf-m-no-plain modfier to the data list ([#12292](https://github.com/patternfly/patternfly-react/issues/12292)) ([f71da53](https://github.com/patternfly/patternfly-react/commit/f71da53cd09a53442ff3fffc43790b08a7465506))
+
 # [6.5.0-prerelease.13](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-integration@6.5.0-prerelease.12...@patternfly/react-integration@6.5.0-prerelease.13) (2026-04-13)
 
 ### Features

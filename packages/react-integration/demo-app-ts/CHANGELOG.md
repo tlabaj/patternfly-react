@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.82](https://github.com/patternfly/patternfly-react/compare/demo-app-ts@6.5.0-prerelease.81...demo-app-ts@6.5.0-prerelease.82) (2026-04-13)
+
+### Features
+
+- **Data list:** Add isNoPlainOnGlass prop to add pf-m-no-plain modfier to the data list ([#12292](https://github.com/patternfly/patternfly-react/issues/12292)) ([f71da53](https://github.com/patternfly/patternfly-react/commit/f71da53cd09a53442ff3fffc43790b08a7465506))
+
 # [6.5.0-prerelease.81](https://github.com/patternfly/patternfly-react/compare/demo-app-ts@6.5.0-prerelease.80...demo-app-ts@6.5.0-prerelease.81) (2026-04-13)
 
 ### Features
