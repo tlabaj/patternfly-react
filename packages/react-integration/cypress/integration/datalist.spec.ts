@@ -13,19 +13,20 @@ describe('Data List Demo Test', () => {
       .should('have.class', 'pf-m-no-plain-on-glass')
       .and('have.class', 'pf-m-plain');
 
-    /**
-     * This test fails due to a css bug.
-     */
-    cy.get('[data-testid="data-list-glass-plain-both"]').then(($el) => {
-      const el = $el[0];
-      const win = el.ownerDocument.defaultView;
-      if (!win) {
-        throw new Error('expected window');
-      }
-      const bg = win.getComputedStyle(el).backgroundColor;
-      const fullyTransparent = bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)' || bg === 'rgba(0,0,0,0)';
-      expect(fullyTransparent, `expected non-transparent background, got ${bg}`).to.eq(false);
-    });
+    // Glass/plain tokens set --pf-v6-c-data-list__item--BackgroundColor on the list; items paint it.
+    // The `<ul>` has no background-color rule, so its computed background stays transparent.
+    cy.get('[data-testid="data-list-glass-plain-both"] .pf-v6-c-data-list__item')
+      .first()
+      .then(($item) => {
+        const el = $item[0];
+        const win = el.ownerDocument.defaultView;
+        if (!win) {
+          throw new Error('expected window');
+        }
+        const bg = win.getComputedStyle(el).backgroundColor;
+        const fullyTransparent = bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)' || bg === 'rgba(0,0,0,0)';
+        expect(fullyTransparent, `expected non-transparent item background, got ${bg}`).to.eq(false);
+      });
   });
 
   it('Verify rows selectable', () => {
