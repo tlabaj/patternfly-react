@@ -39,9 +39,6 @@ describe('Accordion Demo Test', () => {
       .should('have.class', 'pf-m-no-plain-on-glass')
       .and('have.class', 'pf-m-plain');
 
-    /**
-     * This test fails due to a css bug.
-     */
     cy.get('[data-testid="accordion-glass-plain-both"]').then(($el) => {
       const el = $el[0];
       const win = el.ownerDocument.defaultView;
