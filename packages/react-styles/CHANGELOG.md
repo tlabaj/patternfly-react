@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.17](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-styles@6.5.0-prerelease.16...@patternfly/react-styles@6.5.0-prerelease.17) (2026-04-13)
+
+### Features
+
+- **Accordion:** Added isPlain and isNoPlainOnGlass prop to Accordion ([#12288](https://github.com/patternfly/patternfly-react/issues/12288)) ([55ffb51](https://github.com/patternfly/patternfly-react/commit/55ffb51760542045f9b7dac0af584cee4a3eff4e))
+
 # [6.5.0-prerelease.16](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-styles@6.5.0-prerelease.15...@patternfly/react-styles@6.5.0-prerelease.16) (2026-04-06)
 
 ### Features

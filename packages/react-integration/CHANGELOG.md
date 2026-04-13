@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.13](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-integration@6.5.0-prerelease.12...@patternfly/react-integration@6.5.0-prerelease.13) (2026-04-13)
+
+### Features
+
+- **Accordion:** Added isPlain and isNoPlainOnGlass prop to Accordion ([#12288](https://github.com/patternfly/patternfly-react/issues/12288)) ([55ffb51](https://github.com/patternfly/patternfly-react/commit/55ffb51760542045f9b7dac0af584cee4a3eff4e))
+
 # [6.5.0-prerelease.12](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-integration@6.5.0-prerelease.11...@patternfly/react-integration@6.5.0-prerelease.12) (2026-04-01)
 
 **Note:** Version bump only for package @patternfly/react-integration

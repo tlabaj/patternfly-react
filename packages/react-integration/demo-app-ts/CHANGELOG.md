@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.81](https://github.com/patternfly/patternfly-react/compare/demo-app-ts@6.5.0-prerelease.80...demo-app-ts@6.5.0-prerelease.81) (2026-04-13)
+
+### Features
+
+- **Accordion:** Added isPlain and isNoPlainOnGlass prop to Accordion ([#12288](https://github.com/patternfly/patternfly-react/issues/12288)) ([55ffb51](https://github.com/patternfly/patternfly-react/commit/55ffb51760542045f9b7dac0af584cee4a3eff4e))
+
 # [6.5.0-prerelease.80](https://github.com/patternfly/patternfly-react/compare/demo-app-ts@6.5.0-prerelease.79...demo-app-ts@6.5.0-prerelease.80) (2026-04-10)
 
 **Note:** Version bump only for package demo-app-ts
