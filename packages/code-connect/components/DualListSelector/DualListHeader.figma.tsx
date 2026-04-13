@@ -1,6 +1,6 @@
 import figma from '@figma/code-connect';
 import { Button, ButtonVariant, DualListSelectorPane, SearchInput } from '@patternfly/react-core';
-import RhMicronsCloseIcon from '@patternfly/react-icons/dist/esm/icons/times-icon';
+import RhMicronsCloseIcon from '@patternfly/react-icons/dist/esm/icons/rh-microns-close-icon';
 
 // Documentation for DualListHeader can be found at https://www.patternfly.org/components/dual-list-selector
 

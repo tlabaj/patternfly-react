@@ -5,7 +5,7 @@ PatternFly Icons as React Components.
 ## Usage
 
 ```tsx
-import RhMicronsCloseIcon from '@patternfly/react-icons/dist/esm/icons/times-icon';
+import RhMicronsCloseIcon from  '@patternfly/react-icons/dist/esm/icons/rh-microns-close-icon';
 
 const closeIcon = <RhMicronsCloseIcon />;
 ```
@@ -47,7 +47,7 @@ optimization: {
 Use ESM module imports to enable tree shaking with no additional setup required.
 
 ```JS
-import RhMicronsCloseIcon from '@patternfly/react-icons/dist/esm/icons/times-icon';
+import RhMicronsCloseIcon from  '@patternfly/react-icons/dist/esm/icons/rh-microns-close-icon';
 ```
 
 To enable tree shaking with named imports for CJS modules, utilize [babel-plugin-transform-imports](https://www.npmjs.com/package/babel-plugin-transform-imports) and update a babel.config.js file to utilize the plugin:
