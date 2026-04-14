@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.5.0-prerelease.64](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-docs@7.5.0-prerelease.63...@patternfly/react-docs@7.5.0-prerelease.64) (2026-04-14)
+
+**Note:** Version bump only for package @patternfly/react-docs
+
 # [7.5.0-prerelease.63](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-docs@7.5.0-prerelease.62...@patternfly/react-docs@7.5.0-prerelease.63) (2026-04-13)
 
 **Note:** Version bump only for package @patternfly/react-docs

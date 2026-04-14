@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.54](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.53...@patternfly/react-core@6.5.0-prerelease.54) (2026-04-14)
+
+### Features
+
+- **Menu toggle:** Added support for a adding styling for a menu toggle in a form ([#12326](https://github.com/patternfly/patternfly-react/issues/12326)) ([7adc580](https://github.com/patternfly/patternfly-react/commit/7adc58002949d1a5ebbf1b66d5b0d1f673d9d50e))
+
 # [6.5.0-prerelease.53](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.52...@patternfly/react-core@6.5.0-prerelease.53) (2026-04-13)
 
 ### Features
