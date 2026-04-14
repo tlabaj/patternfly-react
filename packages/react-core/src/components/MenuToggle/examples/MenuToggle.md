@@ -179,6 +179,14 @@ In the following example, the toggle fills the width of its parent as the window
 
 ```
 
+### Toggle in a form
+
+When a menu toggle is used inside a form, pass the `isInForm` property so the toggle receives form-appropriate styling.
+
+```ts file="MenuToggleInForm.tsx"
+
+```
+
 ### Typeahead toggle
 
 To create a typeahead toggle, pass in `variant="typeahead"` to the `<MenuToggle>`. Then, pass a `<TextInputGroup>` component as a child of the `<MenuToggle>`.

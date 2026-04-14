@@ -45,6 +45,8 @@ export interface MenuToggleProps
   isFullHeight?: boolean;
   /** Flag indicating the toggle takes up the full width of its parent */
   isFullWidth?: boolean;
+  /** @beta Flag indicating the toggle is placed inside a form */
+  isInForm?: boolean;
   /** Flag indicating the toggle contains placeholder text */
   isPlaceholder?: boolean;
   /** @beta Flag indicating the toggle has circular styling. Can only be applied to plain toggles. */
@@ -83,6 +85,7 @@ class MenuToggleBase extends Component<MenuToggleProps> {
     isDisabled: false,
     isFullWidth: false,
     isFullHeight: false,
+    isInForm: false,
     isPlaceholder: false,
     isCircle: false,
     size: 'default',
@@ -99,6 +102,7 @@ class MenuToggleBase extends Component<MenuToggleProps> {
       isDisabled,
       isFullHeight,
       isFullWidth,
+      isInForm,
       isPlaceholder,
       isCircle,
       isSettings,
@@ -179,9 +183,10 @@ class MenuToggleBase extends Component<MenuToggleProps> {
             variant === 'secondary' && styles.modifiers.secondary,
             status && styles.modifiers[status],
             (isPlain || isPlainText) && styles.modifiers.plain,
-            isPlainText && 'pf-m-text',
+            isPlainText && styles.modifiers.text,
             isFullHeight && styles.modifiers.fullHeight,
             isFullWidth && styles.modifiers.fullWidth,
+            isInForm && styles.modifiers.form,
             isDisabled && styles.modifiers.disabled,
             isPlaceholder && styles.modifiers.placeholder,
             isSettings && styles.modifiers.settings,
