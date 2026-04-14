@@ -83,13 +83,13 @@ You can import or reference static SVG files directly:
 
 ```jsx
 // In HTML
-<img src="/icons/static/times-icon.svg" alt="Close" />
+<img src="/icons/static/rh-microns-close-icon.svg" alt="Close" />
 
 // In CSS
 .close-icon {
-  background-image: url('/icons/static/times-icon.svg');
+  background-image: url('/icons/static/rh-microns-close-icon.svg');
 }
 
 // Direct file path
-import RhMicronsCloseIcon from '@patternfly/react-icons/dist/static/times-icon.svg';
+import RhMicronsCloseIcon from '@patternfly/react-icons/dist/static/rh-microns-close-icon.svg';
 ```
