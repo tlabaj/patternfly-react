@@ -24,8 +24,10 @@ export interface CreateIconProps {
 export interface SVGIconProps extends Omit<React.HTMLProps<SVGElement>, 'ref'> {
   title?: string;
   className?: string;
-  /* Indicates the icon should render using alternate svg data for unified theme */
+  /** Indicates the icon should render using alternate svg data for the unified theme */
   set?: 'default' | 'rh-ui';
+  /** Indicates the icon should render without its default styling specified in its IconDefinition.svgClassName. */
+  noDefaultStyle?: boolean;
 }
 
 let currentId = 0;
@@ -70,12 +72,16 @@ export function createIcon({ name, icon, rhUiIcon = null }: CreateIconProps): Re
 
     id = `icon-title-${currentId++}`;
 
+    static defaultProps: SVGIconProps = {
+      noDefaultStyle: false
+    };
+
     constructor(props: SVGIconProps) {
       super(props);
     }
 
     render() {
-      const { title, className: propsClassName, set, ...props } = this.props;
+      const { title, className: propsClassName, set, noDefaultStyle, ...props } = this.props;
 
       const hasTitle = Boolean(title);
       const classNames = ['pf-v6-svg'];
@@ -98,7 +104,7 @@ export function createIcon({ name, icon, rhUiIcon = null }: CreateIconProps): Re
         const _yOffset = yOffset ?? 0;
         const viewBox = [_xOffset, _yOffset, width, height].join(' ');
 
-        if (svgClassName) {
+        if (svgClassName && !noDefaultStyle) {
           classNames.push(svgClassName);
         }
 
