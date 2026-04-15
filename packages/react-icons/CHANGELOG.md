@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.24](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-icons@6.5.0-prerelease.23...@patternfly/react-icons@6.5.0-prerelease.24) (2026-04-15)
+
+### Features
+
+- **icon:** apply rh-standard styling and add opt-out ([#12320](https://github.com/patternfly/patternfly-react/issues/12320)) ([930cd56](https://github.com/patternfly/patternfly-react/commit/930cd560742b8b4b8c5f512449eaefce43ddf5e0))
+
 # [6.5.0-prerelease.23](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-icons@6.5.0-prerelease.22...@patternfly/react-icons@6.5.0-prerelease.23) (2026-04-15)
 
 **Note:** Version bump only for package @patternfly/react-icons
