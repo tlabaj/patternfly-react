@@ -1,3 +1,68 @@
+const visitDrawerDemoWithGlassTheme = () => {
+  cy.visit('http://localhost:3000/drawer-demo-nav-link');
+  cy.viewport(1280, 800);
+  cy.document().then((doc) => {
+    doc.documentElement.classList.add('pf-v6-theme-glass');
+  });
+  cy.get('html').should('have.class', 'pf-v6-theme-glass');
+};
+
+const assertGlassPlainPanel = (testId: string, headlineSnippet: string) => {
+  cy.get(`[data-testid="${testId}"]`).should(($el) => {
+    expect($el, testId).to.have.length(1);
+    expect($el).to.not.have.attr('hidden');
+    expect($el).to.not.have.attr('inert');
+    expect($el).to.have.class('pf-m-glass');
+    expect($el).to.have.class('pf-m-plain');
+    expect($el).to.have.class('pf-m-no-plain-on-glass');
+    expect($el).to.contain.text(headlineSnippet);
+  });
+
+  cy.get(`[data-testid="${testId}"]`).should(($el) => {
+    const style = window.getComputedStyle($el[0]);
+    const bg = style.backgroundColor;
+    const backdrop = style.backdropFilter;
+
+    const rgbaCommaAlpha = (color: string): number | undefined => {
+      if (color === 'transparent') {
+        return 0;
+      }
+      if (!color.startsWith('rgba(') || !color.endsWith(')')) {
+        return undefined;
+      }
+      const inner = color.slice('rgba('.length, -1);
+      const parts = inner.split(',').map((p) => p.trim());
+      if (parts.length !== 4) {
+        return undefined;
+      }
+      return parseFloat(parts[3]);
+    };
+
+    const rgbSlashAlpha = (color: string): number | undefined => {
+      if (!color.startsWith('rgb(')) {
+        return undefined;
+      }
+      const slash = color.indexOf('/');
+      const close = color.lastIndexOf(')');
+      if (slash === -1 || close === -1 || slash >= close) {
+        return undefined;
+      }
+      const a = parseFloat(color.slice(slash + 1, close).trim());
+      return Number.isNaN(a) ? undefined : a;
+    };
+
+    const alpha = rgbaCommaAlpha(bg) ?? rgbSlashAlpha(bg);
+    const hasSemiTransparentBackground = alpha !== undefined && alpha < 1;
+    const hasBackdropBlur = Boolean(backdrop && backdrop !== 'none');
+
+    if (!hasSemiTransparentBackground && !hasBackdropBlur) {
+      throw new Error(
+        `expected glass panel (semi-transparent background or backdrop-filter); got backgroundColor=${bg}, backdropFilter=${backdrop || ''}`
+      );
+    }
+  });
+};
+
 describe('Drawer Demo Test', () => {
   afterEach(() => {
     cy.document().then((doc) => {
@@ -9,72 +74,30 @@ describe('Drawer Demo Test', () => {
     cy.visit('http://localhost:3000/drawer-demo-nav-link');
   });
 
-  it('glass theme + plain + glass: panel shows glass treatment (transparent bg and/or backdrop-filter)', () => {
-    // Self-contained: do not rely on test order; other specs leave the page in various states.
-    cy.visit('http://localhost:3000/drawer-demo-nav-link');
-    cy.viewport(1280, 800);
+  it('glass theme + isInline drawer + plain/glass: panel shows glass treatment (transparent bg and/or backdrop-filter)', () => {
+    visitDrawerDemoWithGlassTheme();
 
-    cy.document().then((doc) => {
-      doc.documentElement.classList.add('pf-v6-theme-glass');
-    });
-    cy.get('html').should('have.class', 'pf-v6-theme-glass');
-
-    cy.get('#drawer-glass-plain-combo.pf-v6-c-drawer').should('have.class', 'pf-m-expanded');
-
-    cy.get('[data-testid="drawer-glass-plain-panel"]').should(($el) => {
-      expect($el, 'glass plain combo panel').to.have.length(1);
-      expect($el).to.not.have.attr('hidden');
-      expect($el).to.not.have.attr('inert');
-      expect($el).to.have.class('pf-m-glass');
-      expect($el).to.have.class('pf-m-plain');
-      expect($el).to.have.class('pf-m-no-plain-on-glass');
-      expect($el).to.contain.text('Glass theme plain / no-plain-on-glass combo');
+    cy.get('#drawer-glass-plain-inline.pf-v6-c-drawer').should(($drawer) => {
+      expect($drawer).to.have.length(1);
+      expect($drawer).to.have.class('pf-m-expanded');
+      expect($drawer).to.have.class('pf-m-inline');
+      expect($drawer).to.not.have.class('pf-m-static');
     });
 
-    cy.get('[data-testid="drawer-glass-plain-panel"]').should(($el) => {
-      const style = window.getComputedStyle($el[0]);
-      const bg = style.backgroundColor;
-      const backdrop = style.backdropFilter;
+    assertGlassPlainPanel('drawer-glass-plain-panel-inline', 'Glass theme plain / no-plain-on-glass combo (inline)');
+  });
 
-      const rgbaCommaAlpha = (color: string): number | undefined => {
-        if (color === 'transparent') {
-          return 0;
-        }
-        if (!color.startsWith('rgba(') || !color.endsWith(')')) {
-          return undefined;
-        }
-        const inner = color.slice('rgba('.length, -1);
-        const parts = inner.split(',').map((p) => p.trim());
-        if (parts.length !== 4) {
-          return undefined;
-        }
-        return parseFloat(parts[3]);
-      };
+  it('glass theme + isStatic drawer + plain/glass: panel shows glass treatment (transparent bg and/or backdrop-filter)', () => {
+    visitDrawerDemoWithGlassTheme();
 
-      // e.g. rgb(255 255 255 / 0.08) from getComputedStyle in some engines
-      const rgbSlashAlpha = (color: string): number | undefined => {
-        if (!color.startsWith('rgb(')) {
-          return undefined;
-        }
-        const slash = color.indexOf('/');
-        const close = color.lastIndexOf(')');
-        if (slash === -1 || close === -1 || slash >= close) {
-          return undefined;
-        }
-        const a = parseFloat(color.slice(slash + 1, close).trim());
-        return Number.isNaN(a) ? undefined : a;
-      };
-
-      const alpha = rgbaCommaAlpha(bg) ?? rgbSlashAlpha(bg);
-      const hasSemiTransparentBackground = alpha !== undefined && alpha < 1;
-      const hasBackdropBlur = Boolean(backdrop && backdrop !== 'none');
-
-      if (!hasSemiTransparentBackground && !hasBackdropBlur) {
-        throw new Error(
-          `expected glass panel (semi-transparent background or backdrop-filter); got backgroundColor=${bg}, backdropFilter=${backdrop || ''}`
-        );
-      }
+    cy.get('#drawer-glass-plain-static.pf-v6-c-drawer').should(($drawer) => {
+      expect($drawer).to.have.length(1);
+      expect($drawer).to.have.class('pf-m-expanded');
+      expect($drawer).to.have.class('pf-m-static');
+      expect($drawer).to.not.have.class('pf-m-inline');
     });
+
+    assertGlassPlainPanel('drawer-glass-plain-panel-static', 'Glass theme plain / no-plain-on-glass combo (static)');
   });
 
   it('Verify focus is automatically handled with focus trap enabled', () => {

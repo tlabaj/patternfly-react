@@ -118,16 +118,30 @@ export class DrawerDemo extends Component<DrawerProps, DrawerDemoState> {
     const drawerContent =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante, id vehicula ex accumsan ut. Morbi viverra, eros vel porttitor facilisis, eros purus aliquet erat,nec lobortis felis elit pulvinar sem. Vivamus vulputate, risus eget commodo eleifend, eros nibh porta quam, vitae lacinia leo libero at magna. Maecenas aliquam sagittis orci, et posuere nisi ultrices sit amet. Aliquam ex odio, malesuada sed posuere quis, pellentesque at mauris. Phasellus venenatis massa ex, eget pulvinar libero auctor pretium. Aliquam erat volutpat. Duis euismod justo in quam ullamcorper, in commodo massa vulputate.';
 
-    const glassThemePlainComboPanelContent = (
+    const glassThemePlainInlinePanelContent = (
       <DrawerPanelContent
-        id="drawer-panel-glass-plain-combo"
-        data-testid="drawer-glass-plain-panel"
+        id="drawer-panel-glass-plain-inline"
+        data-testid="drawer-glass-plain-panel-inline"
         isPlain
         isNoPlainOnGlass
         isGlass
       >
         <DrawerHead>
-          <span>Glass theme plain / no-plain-on-glass combo</span>
+          <span>Glass theme plain / no-plain-on-glass combo (inline)</span>
+        </DrawerHead>
+      </DrawerPanelContent>
+    );
+
+    const glassThemePlainStaticPanelContent = (
+      <DrawerPanelContent
+        id="drawer-panel-glass-plain-static"
+        data-testid="drawer-glass-plain-panel-static"
+        isPlain
+        isNoPlainOnGlass
+        isGlass
+      >
+        <DrawerHead>
+          <span>Glass theme plain / no-plain-on-glass combo (static)</span>
         </DrawerHead>
       </DrawerPanelContent>
     );
@@ -165,19 +179,29 @@ export class DrawerDemo extends Component<DrawerProps, DrawerDemoState> {
             <DrawerContentBody>{drawerContent}</DrawerContentBody>
           </DrawerContent>
         </Drawer>
-        <div id="drawer-glass-plain-combo-container">
+        <div id="drawer-glass-plain-demos">
           {/*
-            isStatic: panel must not use the collapsed `hidden` / inert path — Cypress be.visible fails on a hidden panel.
-            isExpanded: keeps pf-m-expanded on the drawer root for layout.
+            Split drawers so integration tests cover isInline and isStatic separately.
+            isExpanded keeps pf-m-expanded; inline uses pf-m-inline only; static uses pf-m-static only.
           */}
           <Drawer
-            id="drawer-glass-plain-combo"
+            id="drawer-glass-plain-inline"
+            isExpanded={true}
+            isInline={true}
+            style={{ minHeight: '120px', height: '120px' }}
+          >
+            <DrawerContent colorVariant={DrawerColorVariant.default} panelContent={glassThemePlainInlinePanelContent}>
+              <DrawerContentBody>Glass theme + isPlain + isGlass (inline)</DrawerContentBody>
+            </DrawerContent>
+          </Drawer>
+          <Drawer
+            id="drawer-glass-plain-static"
             isExpanded={true}
             isStatic={true}
             style={{ minHeight: '120px', height: '120px' }}
           >
-            <DrawerContent colorVariant={DrawerColorVariant.default} panelContent={glassThemePlainComboPanelContent}>
-              <DrawerContentBody>Glass theme + isPlain + isNoPlainOnGlass + isGlass demo</DrawerContentBody>
+            <DrawerContent colorVariant={DrawerColorVariant.default} panelContent={glassThemePlainStaticPanelContent}>
+              <DrawerContentBody>Glass theme + isPlain + isGlass (static)</DrawerContentBody>
             </DrawerContent>
           </Drawer>
         </div>
