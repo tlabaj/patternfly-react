@@ -134,7 +134,7 @@ class ToolbarFilter extends Component<ToolbarFilterProps, ToolbarFilterState> {
       return (
         <Fragment>
           {showToolbarItem && <ToolbarItem {...props}>{children}</ToolbarItem>}
-          {collapsedLabelPortalTarget != null && ReactDOM.createPortal(labelGroup, collapsedLabelPortalTarget)}
+          {collapsedLabelPortalTarget !== null && ReactDOM.createPortal(labelGroup, collapsedLabelPortalTarget)}
         </Fragment>
       );
     }
@@ -146,7 +146,7 @@ class ToolbarFilter extends Component<ToolbarFilterProps, ToolbarFilterState> {
           return (
             <Fragment>
               {showToolbarItem && <ToolbarItem {...props}>{children}</ToolbarItem>}
-              {labelContainer != null && ReactDOM.createPortal(labelGroup, labelContainer)}
+              {labelContainer !== null && ReactDOM.createPortal(labelGroup, labelContainer)}
               {expandableLabelContainerRef &&
                 expandableLabelContainerRef.current &&
                 ReactDOM.createPortal(labelGroup, expandableLabelContainerRef.current)}
