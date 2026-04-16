@@ -39,7 +39,7 @@ export interface DrawerPanelContentProps extends Omit<React.HTMLProps<HTMLDivEle
   hasNoGlass?: boolean;
   /** @beta Flag indicating that the drawer panel should use glass styles. */
   isGlass?: boolean;
-  /** @beta Flag indicating that the drawer panel should use plain styles. */
+  /** @beta Flag indicating that the drawer panel should use plain styles. This only applies when the drawer is static or inline. */
   isPlain?: boolean;
   /** @beta Flag indicating that plain styles should be disabled when glass styles are used. */
   isNoPlainOnGlass?: boolean;
