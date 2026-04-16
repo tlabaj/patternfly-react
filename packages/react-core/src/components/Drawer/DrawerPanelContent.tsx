@@ -37,7 +37,7 @@ export interface DrawerPanelContentProps extends Omit<React.HTMLProps<HTMLDivEle
   isResizable?: boolean;
   /** @beta Flag indicating that the drawer panel should disable glass styles. This prop is intended to work with isPill drawers. */
   hasNoGlass?: boolean;
-  /** @beta Flag indicating that the drawer panel should use glass styles. */
+  /** @beta Flag indicating that the drawer panel should use glass styles when in glass theme */
   isGlass?: boolean;
   /** @beta Flag indicating that the drawer panel should use plain styles. This only applies when the drawer is static or inline. */
   isPlain?: boolean;
