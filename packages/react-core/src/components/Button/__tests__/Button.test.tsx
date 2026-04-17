@@ -555,6 +555,48 @@ describe('Favorite button', () => {
   });
 });
 
+describe('Dock variant', () => {
+  test(`Renders with class ${styles.modifiers.dock} when isDocked = true`, () => {
+    render(<Button isDocked>Dock Button</Button>);
+    expect(screen.getByRole('button')).toHaveClass(styles.modifiers.dock);
+  });
+
+  test(`Does not render with class ${styles.modifiers.dock} when isDocked is not passed`, () => {
+    render(<Button>Button</Button>);
+    expect(screen.getByRole('button')).not.toHaveClass(styles.modifiers.dock);
+  });
+
+  test(`Renders with class ${styles.modifiers.textExpanded} when isTextExpanded = true and isDocked = true`, () => {
+    render(
+      <Button isTextExpanded isDocked>
+        Text Expanded Button
+      </Button>
+    );
+    expect(screen.getByRole('button')).toHaveClass(styles.modifiers.textExpanded);
+  });
+
+  test(`Does not render with class ${styles.modifiers.textExpanded} when isTextExpanded is not passed`, () => {
+    render(<Button>Button</Button>);
+    expect(screen.getByRole('button')).not.toHaveClass(styles.modifiers.textExpanded);
+  });
+
+  test(`Does not render with class ${styles.modifiers.textExpanded} when isTextExpanded = true but isDocked is not passed`, () => {
+    render(<Button isTextExpanded>Text Expanded Button</Button>);
+    expect(screen.getByRole('button')).not.toHaveClass(styles.modifiers.textExpanded);
+  });
+
+  test(`Renders with both ${styles.modifiers.dock} and ${styles.modifiers.textExpanded} when both props are true`, () => {
+    render(
+      <Button isDocked isTextExpanded>
+        Dock Text Expanded Button
+      </Button>
+    );
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass(styles.modifiers.dock);
+    expect(button).toHaveClass(styles.modifiers.textExpanded);
+  });
+});
+
 test(`Renders basic button`, () => {
   const { asFragment } = render(<Button aria-label="basic button">Basic Button</Button>);
   expect(asFragment()).toMatchSnapshot();

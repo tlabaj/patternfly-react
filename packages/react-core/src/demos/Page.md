@@ -52,9 +52,3 @@ When adding a context selector/perspective switcher in a `PageSidebar`, you must
 ```ts file='./examples/Page/PageContextSelector.tsx' isFullscreen
 
 ```
-
-### Docked nav
-
-```ts file='./examples/Page/PageDockedNav.tsx' isFullscreen
-
-```
