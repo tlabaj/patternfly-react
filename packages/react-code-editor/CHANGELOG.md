@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.61](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-code-editor@6.5.0-prerelease.60...@patternfly/react-code-editor@6.5.0-prerelease.61) (2026-04-17)
+
+**Note:** Version bump only for package @patternfly/react-code-editor
+
 # [6.5.0-prerelease.60](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-code-editor@6.5.0-prerelease.59...@patternfly/react-code-editor@6.5.0-prerelease.60) (2026-04-16)
 
 **Note:** Version bump only for package @patternfly/react-code-editor

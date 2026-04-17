@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.58](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.57...@patternfly/react-core@6.5.0-prerelease.58) (2026-04-17)
+
+### Features
+
+- **Page:** added responsive docked nav ([#12327](https://github.com/patternfly/patternfly-react/issues/12327)) ([9f2889d](https://github.com/patternfly/patternfly-react/commit/9f2889da78275f97f85d9dde8493aa9937b8bcc2))
+
 # [6.5.0-prerelease.57](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.56...@patternfly/react-core@6.5.0-prerelease.57) (2026-04-16)
 
 ### Bug Fixes
