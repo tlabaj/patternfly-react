@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.59](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.58...@patternfly/react-core@6.5.0-prerelease.59) (2026-04-20)
+
+**Note:** Version bump only for package @patternfly/react-core
+
 # [6.5.0-prerelease.58](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.57...@patternfly/react-core@6.5.0-prerelease.58) (2026-04-17)
 
 ### Features
