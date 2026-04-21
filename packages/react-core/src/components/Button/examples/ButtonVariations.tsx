@@ -1,6 +1,6 @@
 import { Button, Flex } from '@patternfly/react-core';
 import RhMicronsCloseIcon from '@patternfly/react-icons/dist/esm/icons/rh-microns-close-icon';
-import PlusCircleIcon from '@patternfly/react-icons/dist/esm/icons/plus-circle-icon';
+import RhUiAddCircleFillIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-add-circle-fill-icon';
 import ExternalLinkSquareAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-square-alt-icon';
 import CopyIcon from '@patternfly/react-icons/dist/esm/icons/copy-icon';
 import RhUiNotificationFillIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-notification-fill-icon';
@@ -29,7 +29,7 @@ export const ButtonVariations: React.FunctionComponent = () => (
     </Flex>
     <br />
     <Flex columnGap={{ default: 'columnGapSm' }}>
-      <Button variant="link" icon={<PlusCircleIcon />}>
+      <Button variant="link" icon={<RhUiAddCircleFillIcon />}>
         Link
       </Button>
       <Button variant="link" icon={<ExternalLinkSquareAltIcon />} iconPosition="end">
