@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 
 import { AlertToggleExpandButton } from '../AlertToggleExpandButton';
 import { AlertContext } from '../AlertContext';
@@ -7,7 +8,7 @@ import styles from '@patternfly/react-styles/css/components/Alert/alert';
 
 jest.mock('../../Button');
 
-jest.mock('@patternfly/react-icons/dist/esm/icons/rh-microns-caret-down-icon', () => () => 'Icon mock');
+jest.mock('@patternfly/react-icons/dist/esm/icons/rh-ui-caret-down-icon', () => () => 'Icon mock');
 
 test('Renders without children', () => {
   render(
