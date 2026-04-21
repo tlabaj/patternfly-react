@@ -6,7 +6,7 @@ propComponents: ['Accordion', 'AccordionItem', 'AccordionContent', 'AccordionTog
 ---
 
 import { useState } from 'react';
-import { RhUiCaretRightIcon } from '@patternfly/react-icons/dist/esm/icons/caret-right-icon';
+import RhUiCaretRightIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-caret-right-icon';
 
 ## Examples
 

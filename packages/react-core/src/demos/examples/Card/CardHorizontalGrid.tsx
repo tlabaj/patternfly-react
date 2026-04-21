@@ -20,7 +20,7 @@ import {
   MenuToggleElement
 } from '@patternfly/react-core';
 import RhUiInformationFillIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-information-fill-icon';
-import RhUiCaretRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
+import RhUiCaretRightIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-caret-right-icon';
 import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import EllipsisVIcon from '@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon';
 
