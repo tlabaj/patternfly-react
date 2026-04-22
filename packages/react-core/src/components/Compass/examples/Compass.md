@@ -11,7 +11,6 @@ propComponents:
     'CompassContent',
     'CompassHero',
     'CompassMainHeader',
-    'CompassPanel',
     'CompassMessageBar',
     'CompassMainFooter'
   ]
@@ -33,7 +32,7 @@ In a basic Compass layout, content can be passed to the following props to popul
 
 - `header`: Content rendered at the top of the page, typically including a `<CompassHeader>` component that divides the header into 3 areas, with a logo or brand, middle navigation, and profile.
 - `sidebarStart`: Content rendered at the horizontal start of the page (by default, the left side).
-- `main`: Content rendered in the center of the page, typically including a `<CompassMainHeader>` or `<CompassHero>`, along with a `<CompassContent>` filled with 1 or more `<CompassPanel>` components.
+- `main`: Content rendered in the center of the page, typically including a `<CompassMainHeader>` or `<CompassHero>`, along with a `<CompassContent>` filled with 1 or more `<Panel>` components.
 - `sidebarEnd`: Content rendered at the horizontal end of the page (by default, the right side).
 - `footer`: Content rendered at the bottom of the page.
 
@@ -67,10 +66,14 @@ When using the `children` property in the `<CompassMainHeader>` component, there
 
 ```noLive
 <CompassMainHeader>
-  <CompassPanel>
-    <CompassMainHeaderContent>
-      {Your custom content goes here, which can include the <CompassMainHeaderTitle> and/or <CompassMainHeaderToolbar> sub-components}
-    </CompassMainHeaderContent>
-  </CompassPanel>
+  <Panel>
+    <PanelMain>
+      <PanelMainBody>
+        <CompassMainHeaderContent>
+          {Your custom content goes here, which can include the <CompassMainHeaderTitle> and/or <CompassMainHeaderToolbar> sub-components}
+        </CompassMainHeaderContent>
+      </PanelMainBody>
+    </PanelMain>
+  </Panel>
 </CompassMainHeader>
 ```

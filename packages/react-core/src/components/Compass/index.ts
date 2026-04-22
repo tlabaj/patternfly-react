@@ -12,4 +12,3 @@ export * from './CompassNavContent';
 export * from './CompassNavHome';
 export * from './CompassNavMain';
 export * from './CompassNavSearch';
-export * from './CompassPanel';
