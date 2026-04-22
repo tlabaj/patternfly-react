@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.62](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-table@6.5.0-prerelease.61...@patternfly/react-table@6.5.0-prerelease.62) (2026-04-22)
+
+### Features
+
+- **Table:** support dynamic sticky styling ([#12348](https://github.com/patternfly/patternfly-react/issues/12348)) ([a8118e2](https://github.com/patternfly/patternfly-react/commit/a8118e2c5cca4ccc26f9cf0d9be59e07c4d2a3e0))
+
 # [6.5.0-prerelease.61](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-table@6.5.0-prerelease.60...@patternfly/react-table@6.5.0-prerelease.61) (2026-04-20)
 
 **Note:** Version bump only for package @patternfly/react-table
