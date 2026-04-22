@@ -4,8 +4,8 @@ import { css } from '@patternfly/react-styles';
 import { Spinner, spinnerSize } from '../Spinner';
 import { useOUIAProps, OUIAProps } from '../../helpers/OUIA/ouia';
 import { Badge } from '../Badge';
-import StarIcon from '@patternfly/react-icons/dist/esm/icons/star-icon';
-import OutlinedStarIcon from '@patternfly/react-icons/dist/esm/icons/outlined-star-icon';
+import RhUiStarFillIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-star-fill-icon';
+import RhUiStarIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-star-icon';
 import RhUiSettingsFillIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-settings-fill-icon';
 import { hamburgerIcon } from './hamburgerIcon';
 
@@ -211,10 +211,10 @@ const ButtonBase: React.FunctionComponent<ButtonProps> = ({
       iconContent = (
         <>
           <span className={css('pf-v6-c-button__icon-favorite')}>
-            <OutlinedStarIcon />
+            <RhUiStarIcon />
           </span>
           <span className={css('pf-v6-c-button__icon-favorited')}>
-            <StarIcon />
+            <RhUiStarFillIcon />
           </span>
         </>
       );
