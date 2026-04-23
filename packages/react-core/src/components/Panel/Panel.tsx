@@ -12,7 +12,7 @@ export interface PanelProps extends React.HTMLProps<HTMLDivElement> {
   variant?: 'raised' | 'bordered' | 'secondary';
   /** Flag to add scrollable styling to the panel */
   isScrollable?: boolean;
-  /** @beta When used with a scrollable panel, sets the panel to auto height (scrollable-auto-height modifier) */
+  /** @beta When used with a scrollable panel, sets the panel to auto height */
   isAutoHeight?: boolean;
   /** @beta Flag to remove the panel's border */
   hasNoBorder?: boolean;
