@@ -21,6 +21,7 @@ import {
   Title,
   Icon
 } from '@patternfly/react-core';
+import { LabelStatus } from '../../../components/Label/Label';
 import { Table, Thead, Tbody, Tr, Th, Td, ExpandableRowContent } from '@patternfly/react-table';
 import RhUiCheckCircleFillIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-check-circle-fill-icon';
 import RhUiErrorFillIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-error-fill-icon';
@@ -204,11 +205,11 @@ export const CardStatus: React.FunctionComponent = () => {
       <FlexItem spacer={{ default: 'spacerMd' }}>
         <span>Notifications</span>
       </FlexItem>
-      <Label status="danger">1</Label>
-      <Label status="warning">3</Label>
-      <Label status="success">3</Label>
-      <Label status="danger">3</Label>
-      <Label status="info">3</Label>
+      <Label status={LabelStatus.danger}>1</Label>
+      <Label status={LabelStatus.warning}>3</Label>
+      <Label status={LabelStatus.success}>3</Label>
+      <Label status={LabelStatus.danger}>3</Label>
+      <Label status={LabelStatus.info}>3</Label>
     </Flex>
   );
 

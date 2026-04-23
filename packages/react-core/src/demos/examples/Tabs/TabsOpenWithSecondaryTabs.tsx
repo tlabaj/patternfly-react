@@ -19,6 +19,7 @@ import {
   Flex,
   FlexItem
 } from '@patternfly/react-core';
+import { LabelColor } from '../../../components/Label/Label';
 import RhUiCheckCircleFillIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-check-circle-fill-icon';
 import RhUiInformationFillIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-information-fill-icon';
 import spacing from '@patternfly/react-styles/css/utilities/Spacing/spacing';
@@ -79,7 +80,7 @@ export const TabsOpenWithSecondaryTabs: React.FunctionComponent = () => {
             <DescriptionListDescription>
               <Flex spaceItems={{ default: 'spaceItemsSm' }}>
                 <FlexItem>
-                  <Label color="teal">NS</Label>
+                  <Label color={LabelColor.teal}>NS</Label>
                 </FlexItem>
                 <FlexItem>
                   <a href="#">knative-serving-ingress</a>
@@ -121,7 +122,7 @@ export const TabsOpenWithSecondaryTabs: React.FunctionComponent = () => {
             <DescriptionListDescription>
               <Flex spaceItems={{ default: 'spaceItemsSm' }}>
                 <FlexItem>
-                  <Label color="purple">N</Label>
+                  <Label color={LabelColor.purple}>N</Label>
                 </FlexItem>
                 <FlexItem>ip-10-0-233-118.us-east-2.computer.external</FlexItem>
               </Flex>
@@ -148,7 +149,7 @@ export const TabsOpenWithSecondaryTabs: React.FunctionComponent = () => {
           flexWrap={{ default: 'noWrap' }}
         >
           <FlexItem>
-            <Label color="blue">N</Label>
+            <Label color={LabelColor.blue}>N</Label>
           </FlexItem>
           <FlexItem>
             <Title headingLevel="h1" size="2xl">
