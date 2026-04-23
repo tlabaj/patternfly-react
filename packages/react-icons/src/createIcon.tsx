@@ -35,16 +35,32 @@ export type IconDefinitionWithSvgPathData = Required<Pick<IconDefinition, 'svgPa
  */
 export type IconDefinitionWithSvgPath = Required<Pick<IconDefinition, 'svgPath'>> & IconDefinition;
 
-/** When passing `icon` or `rhUiIcon` keys (nested form), `icon` is required at runtime. */
-export interface CreateIconProps {
+/**
+ * Props for {@link createIconBase} — nested icon definition(s). Used by generated icons and callers
+ * that already structure data as `{ icon, rhUiIcon? }`.
+ */
+export interface CreateIconBaseProps {
   name?: string;
-  icon?: IconDefinition;
+  icon: IconDefinition;
   rhUiIcon?: IconDefinition | null;
 }
 
 /**
- * @deprecated The previous `createIcon` accepted a flat {@link IconDefinition} with top-level
- * `svgPath`. Pass {@link CreateIconProps} with a nested `icon` field instead.
+ * @deprecated Use {@link CreateIconBaseProps} instead.
+ */
+export type CreateIconProps = CreateIconBaseProps;
+
+/**
+ * Props for {@link createIcon} — flat {@link IconDefinition} fields at the top level, optionally with
+ * `rhUiIcon`, matching the pre–nested-config API.
+ */
+export type CreateIconLegacyProps = IconDefinition & {
+  rhUiIcon?: IconDefinition | null;
+};
+
+/**
+ * @deprecated The previous `createIcon` accepted only a flat {@link IconDefinition}. Use {@link createIcon}
+ * for that shape, or {@link createIconBase} with nested `icon` / `rhUiIcon`.
  */
 export type LegacyFlatIconDefinition = IconDefinition;
 
@@ -83,44 +99,6 @@ function normalizeIconDefinition(icon: IconDefinition): IconDefinitionWithSvgPat
   };
 }
 
-/** True when the argument uses the nested `CreateIconProps` shape (`icon` and/or `rhUiIcon` keys). */
-function isNestedCreateIconProps(arg: object): arg is CreateIconProps {
-  return 'icon' in arg || 'rhUiIcon' in arg;
-}
-
-/** Props after resolving legacy `svgPath` and flat `createIcon` arguments. */
-interface NormalizedCreateIconProps {
-  name?: string;
-  icon?: IconDefinitionWithSvgPathData;
-  rhUiIcon: IconDefinitionWithSvgPathData | null;
-}
-
-/**
- * Coerces legacy flat or nested props into normalized {@link NormalizedCreateIconProps}.
- * Nested input must include a non-null `icon` or throws.
- */
-function normalizeCreateIconArg(arg: CreateIconProps | LegacyFlatIconDefinition): NormalizedCreateIconProps {
-  if (isNestedCreateIconProps(arg)) {
-    const p = arg as CreateIconProps;
-    if (p.icon == null) {
-      const label = p.name != null ? ` (name: ${String(p.name)})` : '';
-      throw new Error(
-        `@patternfly/react-icons: createIcon requires an \`icon\` definition when using nested CreateIconProps${label}.`
-      );
-    }
-    return {
-      name: p.name,
-      icon: normalizeIconDefinition(p.icon),
-      rhUiIcon: p.rhUiIcon != null ? normalizeIconDefinition(p.rhUiIcon) : null
-    };
-  }
-  return {
-    name: (arg as LegacyFlatIconDefinition).name,
-    icon: normalizeIconDefinition(arg as IconDefinition),
-    rhUiIcon: null
-  };
-}
-
 /** Renders an inner `<svg>` with viewBox and path(s) for the dual-SVG (CSS swap) layout. */
 const createSvg = (icon: IconDefinitionWithSvgPathData, iconClassName: string) => {
   const { xOffset, yOffset, width, height, svgPathData, svgClassName } = icon ?? {};
@@ -154,35 +132,26 @@ const createSvg = (icon: IconDefinitionWithSvgPathData, iconClassName: string) =
 };
 
 /**
- * Builds a React **class** component that renders a PatternFly SVG icon (`role="img"`, optional `<title>` for a11y).
+ * Preferred factory for **nested** icon config (`icon` and optional `rhUiIcon`). Package-generated icons use this.
  *
- * **Argument shape — pick one:**
- *
- * 1. **`CreateIconProps` (preferred)** — `{ name?, icon?, rhUiIcon? }`. Dimensions and path data sit on `icon`
- *    (and optionally on `rhUiIcon` for Red Hat UI–mapped icons). If the object **has an `icon` or `rhUiIcon` key**
- *    (including `rhUiIcon: null`), this shape is assumed.
- *
- * 2. **Legacy flat `IconDefinition`** — the same fields as `icon`, but at the **top level** (no nested `icon`).
- *    Still accepted so existing callers are not broken. Prefer migrating to `CreateIconProps`.
- *
- * **Path data on each `IconDefinition`:** use `svgPathData` (string or {@link SVGPathObject}[]). The old name
- * `svgPath` is deprecated but still read; `svgPathData` wins if both are present.
- *
- * **Default vs RH UI rendering:** If `rhUiIcon` is set and the consumer does **not** pass `set` on the component,
- *    the output is an outer `<svg.pf-v6-svg>` containing **two** inner `<svg>`s (default + rh-ui) so CSS can swap
- *    which variant is visible. If `set` is `"default"` or `"rh-ui"`, a **single** flat `<svg>` is rendered for that
- *    variant. Requesting `set="rh-ui"` when there is no `rhUiIcon` falls back to the default glyph and logs a
- *    `console.warn` (see implementation).
- *
- * @param arg Icon configuration: either {@link CreateIconProps} (nested `icon` / `rhUiIcon`) or a legacy flat
- *    {@link LegacyFlatIconDefinition}. Runtime detection follows the rules in **Argument shape** above.
- * @returns A `ComponentClass<SVGIconProps>` — render it as `<YourIcon />` or with `title`, `className`, `set`, etc.
+ * @param name Optional display name for the component; falls back to `icon.name` when not set.
+ * @see {@link createIcon} for the legacy **flat** argument shape.
  */
-export function createIcon(arg: CreateIconProps | LegacyFlatIconDefinition): React.ComponentClass<SVGIconProps> {
-  const { name, icon, rhUiIcon = null } = normalizeCreateIconArg(arg);
+export function createIconBase({
+  name,
+  icon,
+  rhUiIcon = null
+}: CreateIconBaseProps): React.ComponentClass<SVGIconProps> {
+  if (icon == null) {
+    const label = name != null ? ` (name: ${String(name)})` : '';
+    throw new Error(`@patternfly/react-icons: createIconBase requires an \`icon\` definition${label}.`);
+  }
+  const normalizedIcon = normalizeIconDefinition(icon);
+  const normalizedRhUiIcon = rhUiIcon != null ? normalizeIconDefinition(rhUiIcon) : null;
+  const displayName = name ?? icon.name;
 
   return class SVGIcon extends Component<SVGIconProps> {
-    static displayName = name;
+    static displayName = displayName;
 
     id = `icon-title-${currentId++}`;
 
@@ -201,16 +170,16 @@ export function createIcon(arg: CreateIconProps | LegacyFlatIconDefinition): Rea
         classNames.push(propsClassName);
       }
 
-      if (set === 'rh-ui' && rhUiIcon === null) {
+      if (set === 'rh-ui' && normalizedRhUiIcon === null) {
         // eslint-disable-next-line no-console
         console.warn(
-          `Set "rh-ui" was provided for ${name}, but no rh-ui icon data exists for this icon. The default icon will be rendered.`
+          `Set "rh-ui" was provided for ${displayName}, but no rh-ui icon data exists for this icon. The default icon will be rendered.`
         );
       }
 
-      if ((set === undefined && rhUiIcon === null) || set !== undefined) {
+      if ((set === undefined && normalizedRhUiIcon === null) || set !== undefined) {
         const iconData: IconDefinitionWithSvgPathData | undefined =
-          set !== undefined && set === 'rh-ui' && rhUiIcon !== null ? rhUiIcon : icon;
+          set !== undefined && set === 'rh-ui' && normalizedRhUiIcon !== null ? normalizedRhUiIcon : normalizedIcon;
         const { xOffset, yOffset, width, height, svgPathData, svgClassName } =
           iconData ?? ({} as Partial<IconDefinitionWithSvgPathData>);
         const _xOffset = xOffset ?? 0;
@@ -259,11 +228,24 @@ export function createIcon(arg: CreateIconProps | LegacyFlatIconDefinition): Rea
             {...(props as Omit<React.SVGProps<SVGElement>, 'ref'>)} // Lie.
           >
             {hasTitle && <title id={this.id}>{title}</title>}
-            {icon && createSvg(icon, 'pf-v6-icon-default')}
-            {rhUiIcon && createSvg(rhUiIcon, 'pf-v6-icon-rh-ui')}
+            {normalizedIcon && createSvg(normalizedIcon, 'pf-v6-icon-default')}
+            {normalizedRhUiIcon && createSvg(normalizedRhUiIcon, 'pf-v6-icon-rh-ui')}
           </svg>
         );
       }
     }
   };
+}
+
+/**
+ * Legacy-friendly factory: **flat** {@link IconDefinition} fields (plus optional `rhUiIcon`) and delegates to
+ * {@link createIconBase}. For nested configs, use {@link createIconBase} directly.
+ */
+export function createIcon(props: CreateIconLegacyProps): React.ComponentClass<SVGIconProps> {
+  const { rhUiIcon, ...icon } = props;
+  return createIconBase({
+    name: icon.name,
+    icon,
+    rhUiIcon: rhUiIcon ?? null
+  });
 }

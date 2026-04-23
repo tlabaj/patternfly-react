@@ -1,5 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { IconDefinition, CreateIconProps, createIcon, LegacyFlatIconDefinition, SVGPathObject } from '../createIcon';
+import {
+  IconDefinition,
+  CreateIconBaseProps,
+  createIcon,
+  createIconBase,
+  LegacyFlatIconDefinition,
+  SVGPathObject
+} from '../createIcon';
 
 const multiPathIcon: IconDefinition = {
   name: 'IconName',
@@ -28,24 +35,24 @@ const rhStandardIcon: IconDefinition = {
   svgClassName: 'pf-v6-icon-rh-standard'
 };
 
-const iconDef: CreateIconProps = {
+const iconDef: CreateIconBaseProps = {
   name: 'SinglePathIconName',
   icon: singlePathIcon
 };
 
-const iconDefWithArrayPath: CreateIconProps = {
+const iconDefWithArrayPath: CreateIconBaseProps = {
   name: 'MultiPathIconName',
   icon: multiPathIcon
 };
 
-const iconDefWithRhStandard: CreateIconProps = {
+const iconDefWithRhStandard: CreateIconBaseProps = {
   name: 'RhStandardIconName',
   icon: rhStandardIcon
 };
 
-const SVGIcon = createIcon(iconDef);
-const SVGArrayIcon = createIcon(iconDefWithArrayPath);
-const RhStandardIcon = createIcon(iconDefWithRhStandard);
+const SVGIcon = createIconBase(iconDef);
+const SVGArrayIcon = createIconBase(iconDefWithArrayPath);
+const RhStandardIcon = createIconBase(iconDefWithRhStandard);
 
 test('sets correct viewBox', () => {
   render(<SVGIcon />);
@@ -76,8 +83,8 @@ test('accepts legacy flat createIcon({ svgPath }) shape', () => {
   expect(screen.getByRole('img', { hidden: true }).querySelector('path')).toHaveAttribute('d', 'legacy-path');
 });
 
-test('accepts CreateIconProps with nested icon using deprecated svgPath field', () => {
-  const nestedLegacyPath: CreateIconProps = {
+test('createIconBase accepts nested icon with deprecated svgPath field', () => {
+  const nestedLegacyPath: CreateIconBaseProps = {
     name: 'NestedLegacyPathIcon',
     icon: {
       width: 8,
@@ -85,7 +92,7 @@ test('accepts CreateIconProps with nested icon using deprecated svgPath field', 
       svgPath: 'nested-legacy-d'
     }
   };
-  const NestedIcon = createIcon(nestedLegacyPath);
+  const NestedIcon = createIconBase(nestedLegacyPath);
   render(<NestedIcon />);
   expect(screen.getByRole('img', { hidden: true }).querySelector('path')).toHaveAttribute('d', 'nested-legacy-d');
 });
@@ -105,15 +112,13 @@ test('does not set svgClassName when noDefaultStyle is true', () => {
   expect(screen.getByRole('img', { hidden: true })).not.toHaveClass('pf-v6-icon-rh-standard');
 });
 
-test('throws when nested CreateIconProps omits icon', () => {
+test('throws when createIconBase omits icon', () => {
   expect(() =>
-    createIcon({
+    createIconBase({
       name: 'MissingDefaultIcon',
       rhUiIcon: null
-    })
-  ).toThrow(
-    '@patternfly/react-icons: createIcon requires an `icon` definition when using nested CreateIconProps (name: MissingDefaultIcon).'
-  );
+    } as any)
+  ).toThrow('@patternfly/react-icons: createIconBase requires an `icon` definition (name: MissingDefaultIcon).');
 });
 
 test('sets correct svgPath if array', () => {
@@ -187,13 +192,13 @@ describe('rh-ui mapping: nested SVGs, set prop, and warnings', () => {
     svgPathData: rhUiPath
   };
 
-  const dualConfig: CreateIconProps = {
+  const dualConfig: CreateIconBaseProps = {
     name: 'DualMappedIcon',
     icon: defaultIconDef,
     rhUiIcon: rhUiIconDef
   };
 
-  const DualMappedIcon = createIcon(dualConfig);
+  const DualMappedIcon = createIconBase(dualConfig);
 
   test('renders two nested inner svgs when rhUiIcon is set and `set` is omitted (swap layout)', () => {
     render(<DualMappedIcon />);
@@ -225,7 +230,7 @@ describe('rh-ui mapping: nested SVGs, set prop, and warnings', () => {
   test('set="rh-ui" with no rhUiIcon mapping falls back to default and warns', () => {
     const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     try {
-      const IconNoRhMapping = createIcon({
+      const IconNoRhMapping = createIconBase({
         name: 'NoRhMappingIcon',
         icon: defaultIconDef,
         rhUiIcon: null
