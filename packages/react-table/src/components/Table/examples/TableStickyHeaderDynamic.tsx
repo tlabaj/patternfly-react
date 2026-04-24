@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { Table, Thead, Tr, Th, Tbody, Td, InnerScrollContainer } from '@patternfly/react-table';
-import BlueprintIcon from '@patternfly/react-icons/dist/esm/icons/blueprint-icon';
+import RhUiBlueprintIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-blueprint-icon';
 
 interface Fact {
   name: string;
@@ -106,7 +106,7 @@ export const TableStickyHeaderDynamic: React.FunctionComponent = () => {
                   {fact.name}
                 </Td>
                 <Td modifier="nowrap" dataLabel={columnNames.state}>
-                  <BlueprintIcon />
+                  <RhUiBlueprintIcon />
                   {` ${fact.state}`}
                 </Td>
                 <Td modifier="nowrap" dataLabel={columnNames.header3}>
