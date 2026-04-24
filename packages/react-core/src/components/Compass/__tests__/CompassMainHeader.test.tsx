@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { CompassMainHeader } from '../CompassMainHeader';
 import styles from '@patternfly/react-styles/css/components/Compass/compass';
+import panelStyles from '@patternfly/react-styles/css/components/Panel/panel';
 
 test('Renders without children', () => {
   render(
@@ -74,21 +75,21 @@ test('Renders children when neither title nor toolbar are provided', () => {
   expect(screen.getByText('Custom children content')).toBeVisible();
 });
 
-test('Renders CompassPanel when title is passed', () => {
+test('Renders Panel when title is passed', () => {
   render(<CompassMainHeader data-testid="test-id" title="Title text" />);
 
   const panel = screen.getByTestId('test-id').firstChild;
-  expect(panel).toHaveClass(styles.compassPanel);
+  expect(panel).toHaveClass(panelStyles.panel);
 });
 
-test('Renders CompassPanel when toolbar is passed', () => {
+test('Renders Panel when toolbar is passed', () => {
   render(<CompassMainHeader data-testid="test-id" toolbar="Toolbar text" />);
 
   const panel = screen.getByTestId('test-id').firstChild;
-  expect(panel).toHaveClass(styles.compassPanel);
+  expect(panel).toHaveClass(panelStyles.panel);
 });
 
-test('Does not render CompassPanel when children are passed', () => {
+test('Does not render Panel when children are passed', () => {
   render(
     <CompassMainHeader data-testid="test-id">
       <div>Children content</div>
@@ -96,10 +97,10 @@ test('Does not render CompassPanel when children are passed', () => {
   );
 
   const content = screen.getByTestId('test-id').firstChild;
-  expect(content).not.toHaveClass(styles.compassPanel);
+  expect(content).not.toHaveClass(panelStyles.panel);
 });
 
-test('Passes props to CompassPanel when title and compassPanelProps is passed', () => {
+test('Passes props to Panel when title and compassPanelProps is passed', () => {
   render(
     <CompassMainHeader data-testid="test-id" compassPanelProps={{ className: 'panel-class' }} title="Title text" />
   );
@@ -108,7 +109,7 @@ test('Passes props to CompassPanel when title and compassPanelProps is passed', 
   expect(panel).toHaveClass('panel-class');
 });
 
-test('Passes props to CompassPanel when toolbar and compassPanelProps is passed', () => {
+test('Passes props to Panel when toolbar and compassPanelProps is passed', () => {
   render(
     <CompassMainHeader data-testid="test-id" compassPanelProps={{ className: 'panel-class' }} toolbar="Toolbar text" />
   );

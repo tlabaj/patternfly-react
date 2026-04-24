@@ -3,7 +3,9 @@ import {
   Compass,
   CompassContent,
   CompassMainHeader,
-  CompassPanel,
+  Panel,
+  PanelMain,
+  PanelMainBody,
   Title,
   NavItem,
   NavList,
@@ -199,7 +201,11 @@ export const CompassDockDemo: React.FunctionComponent = () => {
     <>
       <CompassMainHeader title={<Title headingLevel="h1">Content title</Title>} />
       <CompassContent>
-        <CompassPanel>Content</CompassPanel>
+        <Panel>
+          <PanelMain>
+            <PanelMainBody>Content</PanelMainBody>
+          </PanelMain>
+        </Panel>
       </CompassContent>
     </>
   );
