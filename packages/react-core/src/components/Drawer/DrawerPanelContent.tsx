@@ -41,7 +41,7 @@ export interface DrawerPanelContentProps extends Omit<React.HTMLProps<HTMLDivEle
   isGlass?: boolean;
   /** @beta Flag indicating that the drawer panel should use plain styles. This only applies when the drawer is static or inline. */
   isPlain?: boolean;
-  /** @beta Flag indicating that plain styles should be disabled when glass styles are used. */
+  /** @beta Flag indicating that plain styles should be disabled when glass styles are used. This only applies when the drawer is static or inline. */
   isNoPlainOnGlass?: boolean;
   /** Callback for resize end. */
   onResize?: (event: MouseEvent | TouchEvent | React.KeyboardEvent, width: number, id: string) => void;
