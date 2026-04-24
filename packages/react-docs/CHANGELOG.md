@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.5.0-prerelease.72](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-docs@7.5.0-prerelease.71...@patternfly/react-docs@7.5.0-prerelease.72) (2026-04-24)
+
+### Features
+
+- **ToggleGroup:** added full width variant ([#12374](https://github.com/patternfly/patternfly-react/issues/12374)) ([bf01ade](https://github.com/patternfly/patternfly-react/commit/bf01adecddf38e4d5fc3bc49d68ec9982dc97485))
+
 # [7.5.0-prerelease.71](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-docs@7.5.0-prerelease.70...@patternfly/react-docs@7.5.0-prerelease.71) (2026-04-24)
 
 ### Features

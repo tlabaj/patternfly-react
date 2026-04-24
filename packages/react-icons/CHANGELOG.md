@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.26](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-icons@6.5.0-prerelease.25...@patternfly/react-icons@6.5.0-prerelease.26) (2026-04-24)
+
+### Features
+
+- **ToggleGroup:** added full width variant ([#12374](https://github.com/patternfly/patternfly-react/issues/12374)) ([bf01ade](https://github.com/patternfly/patternfly-react/commit/bf01adecddf38e4d5fc3bc49d68ec9982dc97485))
+
 # [6.5.0-prerelease.25](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-icons@6.5.0-prerelease.24...@patternfly/react-icons@6.5.0-prerelease.25) (2026-04-20)
 
 **Note:** Version bump only for package @patternfly/react-icons

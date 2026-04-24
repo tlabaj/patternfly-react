@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.61](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.60...@patternfly/react-core@6.5.0-prerelease.61) (2026-04-24)
+
+### Features
+
+- **ToggleGroup:** added full width variant ([#12374](https://github.com/patternfly/patternfly-react/issues/12374)) ([bf01ade](https://github.com/patternfly/patternfly-react/commit/bf01adecddf38e4d5fc3bc49d68ec9982dc97485))
+
 # [6.5.0-prerelease.60](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-core@6.5.0-prerelease.59...@patternfly/react-core@6.5.0-prerelease.60) (2026-04-24)
 
 ### Features
