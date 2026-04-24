@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0-prerelease.18](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-tokens@6.5.0-prerelease.17...@patternfly/react-tokens@6.5.0-prerelease.18) (2026-04-24)
+
+### Features
+
+- **Panel, CompassPanel:** Removed CompassPanel component. Updated Panel component for use in with compass ([#12372](https://github.com/patternfly/patternfly-react/issues/12372)) ([51f4467](https://github.com/patternfly/patternfly-react/commit/51f44678475ed6cbfab6b5cdbad712a5e2535235))
+
 # [6.5.0-prerelease.17](https://github.com/patternfly/patternfly-react/compare/@patternfly/react-tokens@6.5.0-prerelease.16...@patternfly/react-tokens@6.5.0-prerelease.17) (2026-04-20)
 
 **Note:** Version bump only for package @patternfly/react-tokens
