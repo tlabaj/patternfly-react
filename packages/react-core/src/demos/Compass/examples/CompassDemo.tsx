@@ -31,7 +31,7 @@ import {
 import PlayIcon from '@patternfly/react-icons/dist/esm/icons/play-icon';
 import OutlinedPlusSquare from '@patternfly/react-icons/dist/esm/icons/outlined-plus-square-icon';
 import OutlinedCopy from '@patternfly/react-icons/dist/esm/icons/outlined-copy-icon';
-import OutlinedQuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon';
+import RhUiQuestionMarkCircleIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-question-mark-circle-icon';
 
 export const CompassBasic: React.FunctionComponent = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -129,7 +129,7 @@ export const CompassBasic: React.FunctionComponent = () => {
             <ActionListGroup>
               <ActionListItem>
                 <Tooltip content="Help">
-                  <Button isCircle variant="plain" icon={<OutlinedQuestionCircleIcon />} aria-label="Help" />
+                  <Button isCircle variant="plain" icon={<RhUiQuestionMarkCircleIcon />} aria-label="Help" />
                 </Tooltip>
               </ActionListItem>
               <ActionListItem>
