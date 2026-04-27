@@ -63,7 +63,7 @@ export const pfToRhIcons = {
   ExpandArrowsAltIcon: { name: 'rh-ui-expand-arrows', icon: getIconData('rh-ui-expand-arrows') },
   ExpandIcon: { name: 'rh-ui-expand', icon: getIconData('rh-ui-expand') },
   ExportIcon: { name: 'rh-ui-export', icon: getIconData('rh-ui-export') },
-  ExternalLinkAltIcon: { name: 'rh-ui-external-link', icon: getIconData('rh-ui-external-link') },
+  ExternalLinkAltIcon: { name: 'rh-ui-external-link-fill', icon: getIconData('rh-ui-external-link-fill') },
   EyeIcon: { name: 'rh-ui-view', icon: getIconData('rh-ui-view') },
   EyeSlashIcon: { name: 'rh-ui-view-off', icon: getIconData('rh-ui-view-off') },
   FileIcon: { name: 'rh-ui-document', icon: getIconData('rh-ui-document') },
