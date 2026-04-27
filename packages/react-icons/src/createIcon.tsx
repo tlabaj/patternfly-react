@@ -16,7 +16,7 @@ export interface IconDefinitionBase {
 
 /**
  * On-disk / nested icon data: `svgPathData` (preferred) or deprecated `svgPath` (at least one is required at
- * runtime for rendering; if both are set, `svgPathData` takes precedence in {@link resolveSvgPathData}).
+ * runtime for rendering; if both are set, `svgPathData` takes precedence when path data is resolved).
  */
 export interface IconDefinition extends IconDefinitionBase {
   svgPathData?: string | SVGPathObject[];
@@ -25,12 +25,6 @@ export interface IconDefinition extends IconDefinitionBase {
    */
   svgPath?: string | SVGPathObject[];
 }
-
-/**
- * {@link createIconBase} and rendering use this after {@link resolveSvgPathData} — not part of the public
- * type surface.
- */
-type NormalizedIconDefinition = Required<Pick<IconDefinition, 'svgPathData'>> & IconDefinition;
 
 /**
  * Nested (current) public API: `{ icon, rhUiIcon?, name? }` as produced by the icon generator and
@@ -43,24 +37,17 @@ export interface CreateIconBaseProps {
 }
 
 /**
- * **Flat (legacy) public API** for {@link createIcon} only — not an alias of {@link IconDefinition} so
- * the legacy shape is obvious at the call site. `createIcon` maps this to {@link CreateIconBaseProps}.
+ * @deprecated Prefer {@link createIconBase} with a nested {@link IconDefinition} using `svgPathData` instead
+ * of this flat `createIcon` shape and legacy `svgPath` field.
  */
-export interface CreateIconLegacyProps {
+export interface CreateIconProps {
   name?: string;
   width: number;
   height: number;
   xOffset?: number;
   yOffset?: number;
-  svgPathData?: string | SVGPathObject[];
-  /**
-   * @deprecated Use {@link CreateIconLegacyProps.svgPathData} instead.
-   */
   svgPath?: string | SVGPathObject[];
   svgClassName?: string;
-  /**
-   * Optional second variant for the `set="rh-ui"` / nested-inner-SVG layout, matching {@link createIconBase}.
-   */
   rhUiIcon?: IconDefinition | null;
 }
 
@@ -75,44 +62,19 @@ export interface SVGIconProps extends Omit<React.HTMLProps<SVGElement>, 'ref'> {
 
 let currentId = 0;
 
-/** Returns path data from `svgPathData` or deprecated `svgPath` (prefers `svgPathData` when both exist). */
-function resolveSvgPathData(icon: IconDefinition): string | SVGPathObject[] {
-  if ('svgPathData' in icon && icon.svgPathData !== undefined) {
-    return icon.svgPathData;
-  }
-  if ('svgPath' in icon && icon.svgPath !== undefined) {
-    return icon.svgPath;
-  }
-  throw new Error('@patternfly/react-icons: IconDefinition must define svgPathData or svgPath');
-}
-
-/** Produces a single {@link NormalizedIconDefinition} for internal rendering. */
-function normalizeIconDefinition(icon: IconDefinition): NormalizedIconDefinition {
-  return {
-    name: icon.name,
-    width: icon.width,
-    height: icon.height,
-    svgPathData: resolveSvgPathData(icon),
-    xOffset: icon.xOffset,
-    yOffset: icon.yOffset,
-    svgClassName: icon.svgClassName
-  };
-}
-
-/** Renders <path> element(s) from resolved (normalized) path data. */
-function pathElementsFromResolvedData(svgPathData: string | SVGPathObject[]): ReactNode {
-  return Array.isArray(svgPathData) ? (
+/** Renders the same path markup as the historical `createIcon` implementation. */
+function getSvgPaths(svgPathData: string | SVGPathObject[] | undefined): ReactNode {
+  return svgPathData && Array.isArray(svgPathData) ? (
     svgPathData.map((pathObject, index) => (
       <path className={pathObject.className} key={`${pathObject.path}-${index}`} d={pathObject.path} />
     ))
   ) : (
-    <path d={svgPathData} />
+    <path d={svgPathData as string} />
   );
 }
 
-/** Renders an inner `<svg>` with viewBox and path(s) for the dual-SVG (CSS swap) layout. */
-const createSvg = (icon: NormalizedIconDefinition, iconClassName: string) => {
-  const { xOffset, yOffset, width, height, svgPathData, svgClassName } = icon;
+const createSvg = (icon: IconDefinition, iconClassName: string) => {
+  const { xOffset, yOffset, width, height, svgPathData, svgClassName } = icon ?? {};
   const _xOffset = xOffset ?? 0;
   const _yOffset = yOffset ?? 0;
   const viewBox = [_xOffset, _yOffset, width, height].join(' ');
@@ -128,61 +90,28 @@ const createSvg = (icon: NormalizedIconDefinition, iconClassName: string) => {
 
   return (
     <svg viewBox={viewBox} className={classNames.join(' ')}>
-      {pathElementsFromResolvedData(svgPathData)}
+      {getSvgPaths(svgPathData)}
     </svg>
   );
 };
 
 /**
- * Preferred factory for **nested** icon config (`icon` and optional `rhUiIcon`). Package-generated icons use this.
- *
- * @param name Optional display name for the component; falls back to `icon.name` when not set.
- * @see {@link createIcon} for the legacy **flat** argument shape.
+ * Factory for the nested / current icon API. Behavior matches the pre-split `createIcon` on `main` (this name
+ * replaces the original export). For path mapping from the flat `svgPath` shape, use {@link createIcon} only.
  */
 export function createIconBase({
   name,
   icon,
   rhUiIcon = null
 }: CreateIconBaseProps): React.ComponentClass<SVGIconProps> {
-  if (icon == null) {
-    const label = name != null ? ` (name: ${String(name)})` : '';
-    throw new Error(`@patternfly/react-icons: createIconBase requires an \`icon\` definition${label}.`);
-  }
-  const normalizedIcon = normalizeIconDefinition(icon);
-  const normalizedRhUiIcon = rhUiIcon != null ? normalizeIconDefinition(rhUiIcon) : null;
-  const displayName = name ?? icon.name;
-
   return class SVGIcon extends Component<SVGIconProps> {
-    static displayName = displayName;
+    static displayName = name;
 
     id = `icon-title-${currentId++}`;
-
-    private warnedMissingRhUi = false;
 
     static defaultProps: SVGIconProps = {
       noDefaultStyle: false
     };
-
-    private warnIfMissingRhUiMapping = () => {
-      if (this.warnedMissingRhUi) {
-        return;
-      }
-      if (this.props.set === 'rh-ui' && normalizedRhUiIcon === null) {
-        this.warnedMissingRhUi = true;
-        // eslint-disable-next-line no-console -- intentional dev-facing warning for invalid set/rh-ui pairing
-        console.warn(
-          `Set "rh-ui" was provided for ${displayName}, but no rh-ui icon data exists for this icon. The default icon will be rendered.`
-        );
-      }
-    };
-
-    componentDidMount() {
-      this.warnIfMissingRhUiMapping();
-    }
-
-    componentDidUpdate() {
-      this.warnIfMissingRhUiMapping();
-    }
 
     /** Renders one root `<svg>`; either a single variant or nested inner SVGs for RH UI swap. */
     render() {
@@ -195,10 +124,16 @@ export function createIconBase({
         classNames.push(propsClassName);
       }
 
-      if (set !== undefined || normalizedRhUiIcon === null) {
-        const iconData: NormalizedIconDefinition =
-          set === 'rh-ui' && normalizedRhUiIcon !== null ? normalizedRhUiIcon : normalizedIcon;
-        const { xOffset, yOffset, width, height, svgPathData, svgClassName } = iconData;
+      if (set === 'rh-ui' && rhUiIcon === null) {
+        // eslint-disable-next-line no-console -- same behavior as main branch createIcon
+        console.warn(
+          `Set "rh-ui" was provided for ${name}, but no rh-ui icon data exists for this icon. The default icon will be rendered.`
+        );
+      }
+
+      if ((set === undefined && rhUiIcon === null) || set !== undefined) {
+        const iconData = set !== undefined && set === 'rh-ui' && rhUiIcon !== null ? rhUiIcon : icon;
+        const { xOffset, yOffset, width, height, svgPathData, svgClassName } = iconData ?? {};
         const _xOffset = xOffset ?? 0;
         const _yOffset = yOffset ?? 0;
         const viewBox = [_xOffset, _yOffset, width, height].join(' ');
@@ -206,8 +141,6 @@ export function createIconBase({
         if (svgClassName && !noDefaultStyle) {
           classNames.push(svgClassName);
         }
-
-        const svgPaths = pathElementsFromResolvedData(svgPathData);
 
         return (
           <svg
@@ -222,7 +155,7 @@ export function createIconBase({
             {...(props as Omit<React.SVGProps<SVGElement>, 'ref'>)} // Lie.
           >
             {hasTitle && <title id={this.id}>{title}</title>}
-            {svgPaths}
+            {getSvgPaths(svgPathData)}
           </svg>
         );
       }
@@ -238,8 +171,8 @@ export function createIconBase({
           {...(props as Omit<React.SVGProps<SVGElement>, 'ref'>)} // Lie.
         >
           {hasTitle && <title id={this.id}>{title}</title>}
-          {createSvg(normalizedIcon, 'pf-v6-icon-default')}
-          {normalizedRhUiIcon && createSvg(normalizedRhUiIcon, 'pf-v6-icon-rh-ui')}
+          {icon && createSvg(icon, 'pf-v6-icon-default')}
+          {rhUiIcon && createSvg(rhUiIcon, 'pf-v6-icon-rh-ui')}
         </svg>
       );
     }
@@ -247,11 +180,11 @@ export function createIconBase({
 }
 
 /**
- * Flat **legacy** entry point: turn {@link CreateIconLegacyProps} into a nested
- * `icon: IconDefinition` with `svgPathData` resolved, then call {@link createIconBase} (all legacy mapping
- * lives in this function). Prefer {@link createIconBase} for the nested `icon` / `rhUiIcon` shape.
+ * Flat **legacy** entry point: turn {@link CreateIconProps} (`svgPath` + layout fields) into a nested
+ * `icon: IconDefinition` with `svgPathData` set from `svgPath`, then call {@link createIconBase}. Use
+ * {@link createIconBase} directly for nested `icon` objects that already use `svgPathData`.
  */
-export function createIcon(legacy: CreateIconLegacyProps): React.ComponentClass<SVGIconProps> {
+export function createIcon(legacy: CreateIconProps): React.ComponentClass<SVGIconProps> {
   const { rhUiIcon = null, ...flat } = legacy;
   const icon: IconDefinition = {
     name: flat.name,
@@ -260,8 +193,7 @@ export function createIcon(legacy: CreateIconLegacyProps): React.ComponentClass<
     xOffset: flat.xOffset,
     yOffset: flat.yOffset,
     svgClassName: flat.svgClassName,
-    // Fold deprecated svgPath (and de-dupe vs svgPathData) in one place, then omit svgPath in the object.
-    svgPathData: resolveSvgPathData(flat as IconDefinition)
+    svgPathData: flat.svgPath
   };
   return createIconBase({ name: icon.name, icon, rhUiIcon });
 }
