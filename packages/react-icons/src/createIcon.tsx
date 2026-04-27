@@ -5,20 +5,18 @@ export interface SVGPathObject {
   className?: string;
 }
 
-export interface IconDefinitionBase {
+/**
+ * Serialized / nested icon data (e.g. from the icon generator or JSON), not the flat {@link CreateIconProps}
+ * shape. `svgPathData` is preferred; deprecated `svgPath` is still supported (at least one path field is
+ * required at runtime; if both are set, `svgPathData` takes precedence).
+ */
+export interface IconDefinition {
   name?: string;
   width: number;
   height: number;
   xOffset?: number;
   yOffset?: number;
   svgClassName?: string;
-}
-
-/**
- * On-disk / nested icon data: `svgPathData` (preferred) or deprecated `svgPath` (at least one is required at
- * runtime for rendering; if both are set, `svgPathData` takes precedence when path data is resolved).
- */
-export interface IconDefinition extends IconDefinitionBase {
   svgPathData?: string | SVGPathObject[];
   /**
    * @deprecated Use {@link IconDefinition.svgPathData} instead.
