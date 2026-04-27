@@ -15,8 +15,8 @@ export interface IconDefinitionBase {
 }
 
 /**
- * SVG path content for one icon variant (default or rh-ui). At runtime at least one of
- * `svgPathData` or `svgPath` must be set; if both are present, `svgPathData` is used.
+ * On-disk / nested icon data: `svgPathData` (preferred) or deprecated `svgPath` (at least one is required at
+ * runtime for rendering; if both are set, `svgPathData` takes precedence in {@link resolveSvgPathData}).
  */
 export interface IconDefinition extends IconDefinitionBase {
   svgPathData?: string | SVGPathObject[];
@@ -26,18 +26,15 @@ export interface IconDefinition extends IconDefinitionBase {
   svgPath?: string | SVGPathObject[];
 }
 
-/** Narrows {@link IconDefinition} to the preferred shape with required `svgPathData`. */
-export type IconDefinitionWithSvgPathData = Required<Pick<IconDefinition, 'svgPathData'>> & IconDefinition;
-
 /**
- * @deprecated Use {@link IconDefinition} with `svgPathData` instead.
- * Narrows {@link IconDefinition} to the legacy shape with required `svgPath`.
+ * {@link createIconBase} and rendering use this after {@link resolveSvgPathData} — not part of the public
+ * type surface.
  */
-export type IconDefinitionWithSvgPath = Required<Pick<IconDefinition, 'svgPath'>> & IconDefinition;
+type NormalizedIconDefinition = Required<Pick<IconDefinition, 'svgPathData'>> & IconDefinition;
 
 /**
- * Props for {@link createIconBase} — nested icon definition(s). Used by generated icons and callers
- * that already structure data as `{ icon, rhUiIcon? }`.
+ * Nested (current) public API: `{ icon, rhUiIcon?, name? }` as produced by the icon generator and
+ * `createIconBase` consumers.
  */
 export interface CreateIconBaseProps {
   name?: string;
@@ -46,15 +43,8 @@ export interface CreateIconBaseProps {
 }
 
 /**
- * @deprecated Use {@link CreateIconBaseProps} instead.
- */
-export type CreateIconProps = CreateIconBaseProps;
-
-/**
- * The **flat (legacy) public API** for {@link createIcon}: the same path/view fields as
- * {@link IconDefinition} at the top level, plus optional `rhUiIcon` for the dual-`set` layout.
- * `createIcon` is the only entry that accepts this shape; it maps to {@link CreateIconBaseProps} and calls
- * {@link createIconBase} (see {@link createIcon}).
+ * **Flat (legacy) public API** for {@link createIcon} only — not an alias of {@link IconDefinition} so
+ * the legacy shape is obvious at the call site. `createIcon` maps this to {@link CreateIconBaseProps}.
  */
 export interface CreateIconLegacyProps {
   name?: string;
@@ -96,8 +86,8 @@ function resolveSvgPathData(icon: IconDefinition): string | SVGPathObject[] {
   throw new Error('@patternfly/react-icons: IconDefinition must define svgPathData or svgPath');
 }
 
-/** Produces a single {@link IconDefinitionWithSvgPathData} for internal rendering. */
-function normalizeIconDefinition(icon: IconDefinition): IconDefinitionWithSvgPathData {
+/** Produces a single {@link NormalizedIconDefinition} for internal rendering. */
+function normalizeIconDefinition(icon: IconDefinition): NormalizedIconDefinition {
   return {
     name: icon.name,
     width: icon.width,
@@ -121,7 +111,7 @@ function pathElementsFromResolvedData(svgPathData: string | SVGPathObject[]): Re
 }
 
 /** Renders an inner `<svg>` with viewBox and path(s) for the dual-SVG (CSS swap) layout. */
-const createSvg = (icon: IconDefinitionWithSvgPathData, iconClassName: string) => {
+const createSvg = (icon: NormalizedIconDefinition, iconClassName: string) => {
   const { xOffset, yOffset, width, height, svgPathData, svgClassName } = icon;
   const _xOffset = xOffset ?? 0;
   const _yOffset = yOffset ?? 0;
@@ -206,7 +196,7 @@ export function createIconBase({
       }
 
       if (set !== undefined || normalizedRhUiIcon === null) {
-        const iconData: IconDefinitionWithSvgPathData =
+        const iconData: NormalizedIconDefinition =
           set === 'rh-ui' && normalizedRhUiIcon !== null ? normalizedRhUiIcon : normalizedIcon;
         const { xOffset, yOffset, width, height, svgPathData, svgClassName } = iconData;
         const _xOffset = xOffset ?? 0;
@@ -257,12 +247,21 @@ export function createIconBase({
 }
 
 /**
- * Legacy **flat** factory: maps {@link CreateIconLegacyProps} to {@link CreateIconBaseProps} and calls
- * {@link createIconBase} (all remapping lives here; `createIconBase` only implements rendering). For the
- * nested `icon` / `rhUiIcon` shape, use {@link createIconBase} directly.
+ * Flat **legacy** entry point: turn {@link CreateIconLegacyProps} into a nested
+ * `icon: IconDefinition` with `svgPathData` resolved, then call {@link createIconBase} (all legacy mapping
+ * lives in this function). Prefer {@link createIconBase} for the nested `icon` / `rhUiIcon` shape.
  */
 export function createIcon(legacy: CreateIconLegacyProps): React.ComponentClass<SVGIconProps> {
-  const { rhUiIcon = null, ...iconFields } = legacy;
-  const icon: IconDefinition = iconFields;
+  const { rhUiIcon = null, ...flat } = legacy;
+  const icon: IconDefinition = {
+    name: flat.name,
+    width: flat.width,
+    height: flat.height,
+    xOffset: flat.xOffset,
+    yOffset: flat.yOffset,
+    svgClassName: flat.svgClassName,
+    // Fold deprecated svgPath (and de-dupe vs svgPathData) in one place, then omit svgPath in the object.
+    svgPathData: resolveSvgPathData(flat as IconDefinition)
+  };
   return createIconBase({ name: icon.name, icon, rhUiIcon });
 }
