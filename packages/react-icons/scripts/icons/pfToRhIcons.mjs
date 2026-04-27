@@ -72,7 +72,7 @@ export const pfToRhIcons = {
   FolderIcon: { name: 'rh-ui-folder', icon: getIconData('rh-ui-folder') },
   FolderOpenIcon: { name: 'rh-ui-folder-open', icon: getIconData('rh-ui-folder-open') },
   GripHorizontalIcon: { name: 'rh-ui-grip-horizontal', icon: getIconData('rh-ui-grip-horizontal') },
-  GripVerticalIcon: { name: 'rh-ui-grip-vertical', icon: getIconData('rh-ui-grip-vertical') },
+  GripVerticalIcon: { name: 'rh-ui-grip-vertical-fill', icon: getIconData('rh-ui-grip-vertical-fill') },
   HistoryIcon: { name: 'rh-ui-history', icon: getIconData('rh-ui-history') },
   HomeIcon: { name: 'rh-ui-home', icon: getIconData('rh-ui-home') },
   ImageIcon: { name: 'rh-ui-image', icon: getIconData('rh-ui-image') },

@@ -275,7 +275,7 @@ export const DragDropContainer: React.FunctionComponent<DragDropContainerProps> 
         style={
           {
             '--pf-v6-c-draggable--m-dragging--BackgroundColor':
-              'var(--pf-t--global--background--color--primary--default)'
+              'var(--pf-t--global--background--color--floating--default)'
           } as React.CSSProperties
         }
       >
