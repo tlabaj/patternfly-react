@@ -74,7 +74,7 @@ function getSvgPaths(svgPathData: string | SVGPathObject[] | undefined): ReactNo
 }
 
 const createSvg = (icon: IconDefinition, iconClassName: string) => {
-  const { xOffset, yOffset, width, height, svgPathData, svgClassName } = icon ?? {};
+  const { xOffset, yOffset, width, height, svgPathData, svgPath, svgClassName } = icon ?? {};
   const _xOffset = xOffset ?? 0;
   const _yOffset = yOffset ?? 0;
   const viewBox = [_xOffset, _yOffset, width, height].join(' ');
@@ -90,7 +90,7 @@ const createSvg = (icon: IconDefinition, iconClassName: string) => {
 
   return (
     <svg viewBox={viewBox} className={classNames.join(' ')}>
-      {getSvgPaths(svgPathData)}
+      {getSvgPaths(svgPathData ?? svgPath)}
     </svg>
   );
 };
@@ -104,6 +104,11 @@ export function createIconBase({
   icon,
   rhUiIcon = null
 }: CreateIconBaseProps): React.ComponentClass<SVGIconProps> {
+  if (icon == null) {
+    throw new Error(
+      `@patternfly/react-icons: createIconBase requires an \`icon\` definition (name: ${name ?? 'unknown'}).`
+    );
+  }
   return class SVGIcon extends Component<SVGIconProps> {
     static displayName = name;
 
@@ -133,7 +138,7 @@ export function createIconBase({
 
       if ((set === undefined && rhUiIcon === null) || set !== undefined) {
         const iconData = set !== undefined && set === 'rh-ui' && rhUiIcon !== null ? rhUiIcon : icon;
-        const { xOffset, yOffset, width, height, svgPathData, svgClassName } = iconData ?? {};
+        const { xOffset, yOffset, width, height, svgPathData, svgPath, svgClassName } = iconData ?? {};
         const _xOffset = xOffset ?? 0;
         const _yOffset = yOffset ?? 0;
         const viewBox = [_xOffset, _yOffset, width, height].join(' ');
@@ -155,7 +160,7 @@ export function createIconBase({
             {...(props as Omit<React.SVGProps<SVGElement>, 'ref'>)} // Lie.
           >
             {hasTitle && <title id={this.id}>{title}</title>}
-            {getSvgPaths(svgPathData)}
+            {getSvgPaths(svgPathData ?? svgPath)}
           </svg>
         );
       }
