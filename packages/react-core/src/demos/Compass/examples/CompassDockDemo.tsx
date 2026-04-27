@@ -32,7 +32,7 @@ import {
 } from '@patternfly/react-core';
 import CubeIcon from '@patternfly/react-icons/dist/esm/icons/cube-icon';
 import FolderIcon from '@patternfly/react-icons/dist/esm/icons/folder-icon';
-import QuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/question-circle-icon';
+import RhUiQuestionMarkCircleFillIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-question-mark-circle-fill-icon';
 import CloudIcon from '@patternfly/react-icons/dist/esm/icons/cloud-icon';
 import CodeIcon from '@patternfly/react-icons/dist/esm/icons/code-icon';
 import pfLogo from '../../assets/PF-IconLogo-color.svg';
@@ -160,7 +160,7 @@ export const CompassDockDemo: React.FunctionComponent = () => {
                       ref={helpRef}
                       aria-label="Help"
                       variant={ButtonVariant.plain}
-                      icon={<QuestionCircleIcon />}
+                      icon={<RhUiQuestionMarkCircleFillIcon />}
                     />
                   </Tooltip>
                 </ToolbarItem>

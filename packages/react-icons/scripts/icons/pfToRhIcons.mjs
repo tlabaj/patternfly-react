@@ -121,7 +121,7 @@ export const pfToRhIcons = {
   PrintIcon: { name: 'rh-ui-print', icon: getIconData('rh-ui-print') },
   PrivateIcon: { name: 'rh-ui-lock', icon: getIconData('rh-ui-lock') },
   ProcessAutomationIcon: { name: 'rh-ui-process-automation', icon: getIconData('rh-ui-process-automation') },
-  QuestionCircleIcon: { name: 'rh-ui-question-mark-circle', icon: getIconData('rh-ui-question-mark-circle') },
+  QuestionCircleIcon: { name: 'rh-ui-question-mark-circle-fill', icon: getIconData('rh-ui-question-mark-circle-fill') },
   RedoIcon: { name: 'rh-ui-redo', icon: getIconData('rh-ui-redo') },
   RegionsIcon: { name: 'rh-ui-regions', icon: getIconData('rh-ui-regions') },
   RegistryIcon: { name: 'rh-ui-registry', icon: getIconData('rh-ui-registry') },

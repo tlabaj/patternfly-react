@@ -30,7 +30,7 @@ import {
   ToolbarItem,
   Tooltip
 } from '@patternfly/react-core';
-import QuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/question-circle-icon';
+import RhUiQuestionMarkCircleFillIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-question-mark-circle-fill-icon';
 import CubeIcon from '@patternfly/react-icons/dist/esm/icons/cube-icon';
 import FolderIcon from '@patternfly/react-icons/dist/esm/icons/folder-icon';
 import CloudIcon from '@patternfly/react-icons/dist/esm/icons/cloud-icon';
@@ -341,12 +341,24 @@ export const NavDockedNav: React.FunctionComponent = () => {
               </ToolbarItem>
               <ToolbarItem>
                 {isDockTextExpanded ? (
-                  <MenuToggle ref={helpRef} variant="plain" icon={<QuestionCircleIcon />} isDocked aria-label="Help">
+                  <MenuToggle
+                    ref={helpRef}
+                    variant="plain"
+                    icon={<RhUiQuestionMarkCircleFillIcon />}
+                    isDocked
+                    aria-label="Help"
+                  >
                     Help
                   </MenuToggle>
                 ) : (
                   <Tooltip aria="none" aria-live="off" triggerRef={helpRef} content="Help">
-                    <MenuToggle ref={helpRef} variant="plain" icon={<QuestionCircleIcon />} isDocked aria-label="Help">
+                    <MenuToggle
+                      ref={helpRef}
+                      variant="plain"
+                      icon={<RhUiQuestionMarkCircleFillIcon />}
+                      isDocked
+                      aria-label="Help"
+                    >
                       Help
                     </MenuToggle>
                   </Tooltip>
