@@ -18,9 +18,7 @@ export interface IconDefinition {
   yOffset?: number;
   svgClassName?: string;
   svgPathData?: string | SVGPathObject[];
-  /**
-   * @deprecated Use {@link IconDefinition.svgPathData} instead.
-   */
+  /** @deprecated Use `svgPathData` for nested definitions. */
   svgPath?: string | SVGPathObject[];
 }
 
