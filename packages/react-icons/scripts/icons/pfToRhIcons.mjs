@@ -104,6 +104,7 @@ export const pfToRhIcons = {
   OutlinedCommentsIcon: { name: 'rh-ui-comments', icon: getIconData('rh-ui-comments') },
   OutlinedHddIcon: { name: 'rh-ui-hard-drive', icon: getIconData('rh-ui-hard-drive') },
   OutlinedQuestionCircleIcon: { name: 'rh-ui-question-mark-circle', icon: getIconData('rh-ui-question-mark-circle') },
+  OutlinedStarIcon: { name: 'rh-ui-star', icon: getIconData('rh-ui-star') },
   OutlinedWindowRestoreIcon: { name: 'rh-ui-restore-window', icon: getIconData('rh-ui-restore-window') },
   PackageIcon: { name: 'rh-ui-package', icon: getIconData('rh-ui-package') },
   PauseCircleIcon: { name: 'rh-ui-pause-circle', icon: getIconData('rh-ui-pause-circle') },
@@ -151,7 +152,7 @@ export const pfToRhIcons = {
     icon: getIconData('rh-ui-sort-down-small-to-large')
   },
   SortAmountDownIcon: { name: 'rh-ui-sort-down-large-to-small', icon: getIconData('rh-ui-sort-down-large-to-small') },
-  StarIcon: { name: 'rh-ui-star', icon: getIconData('rh-ui-star') },
+  StarIcon: { name: 'rh-ui-star-fill', icon: getIconData('rh-ui-star-fill') },
   StorageDomainIcon: { name: 'rh-ui-storage-domain', icon: getIconData('rh-ui-storage-domain') },
   SyncAltIcon: { name: 'rh-ui-sync', icon: getIconData('rh-ui-sync') },
   TableIcon: { name: 'rh-ui-table', icon: getIconData('rh-ui-table') },
