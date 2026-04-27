@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react';
 import {
   IconDefinition,
   CreateIconBaseProps,
+  CreateIconLegacyProps,
   createIcon,
   createIconBase,
-  LegacyFlatIconDefinition,
   SVGPathObject
 } from '../createIcon';
 
@@ -71,7 +71,7 @@ test('sets correct svgPath if string', () => {
 });
 
 test('accepts legacy flat createIcon({ svgPath }) shape', () => {
-  const legacyDef: LegacyFlatIconDefinition = {
+  const legacyDef: CreateIconLegacyProps = {
     name: 'LegacyIcon',
     width: 10,
     height: 20,
